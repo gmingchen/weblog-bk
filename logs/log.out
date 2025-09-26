@@ -5692,3 +5692,29 @@ This generated password is for development use only. Your security configuration
 2025-09-26 17:22:59.466 DEBUG 29284 --- [http-nio-8830-exec-5] c.s.w.m.t.mapper.TokenMapper.selectList  : <==      Total: 0
 2025-09-26 17:23:44.439  INFO 29284 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2025-09-26 17:23:44.445  INFO 29284 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-09-26 17:23:47.889  INFO 9808 --- [main] com.slipper.weblog.WeblogApplication     : Starting WeblogApplication using Java 1.8.0_291 on SZ-PC-PDC-135 with PID 9808 (E:\github\weblog-bk\target\classes started by gumingchen in E:\github\weblog-bk)
+2025-09-26 17:23:47.891 DEBUG 9808 --- [main] com.slipper.weblog.WeblogApplication     : Running with Spring Boot v2.7.6, Spring v5.3.24
+2025-09-26 17:23:47.892  INFO 9808 --- [main] com.slipper.weblog.WeblogApplication     : The following 1 profile is active: "test"
+2025-09-26 17:23:48.750  INFO 9808 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8830 (http)
+2025-09-26 17:23:48.756  INFO 9808 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-26 17:23:48.756  INFO 9808 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.69]
+2025-09-26 17:23:48.859  INFO 9808 --- [main] o.a.c.c.C.[.[localhost].[/slipper]       : Initializing Spring embedded WebApplicationContext
+2025-09-26 17:23:48.860  INFO 9808 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 941 ms
+2025-09-26 17:23:49.408 DEBUG 9808 --- [main] c.s.w.c.s.f.TokenAuthenticationFilter    : Filter 'tokenAuthenticationFilter' configured for use
+2025-09-26 17:23:49.498  WARN 9808 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 8a4c5876-017f-4a7e-b648-b06843d4cea0
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-09-26 17:23:49.698  INFO 9808 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@35e74e08, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@a316f6b, org.springframework.security.web.context.SecurityContextPersistenceFilter@7f4a1cac, org.springframework.security.web.header.HeaderWriterFilter@3009eed7, org.springframework.web.filter.CorsFilter@63f9ddf9, org.springframework.security.web.authentication.logout.LogoutFilter@33eb0d4, com.slipper.weblog.core.security.filter.TokenAuthenticationFilter@66749eea, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@c568f91, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5fd43e58, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@410fc508, org.springframework.security.web.session.SessionManagementFilter@4f5f474c, org.springframework.security.web.access.ExceptionTranslationFilter@60591e1b, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@7a572ea0]
+2025-09-26 17:23:49.863  INFO 9808 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8830 (http) with context path '/slipper'
+2025-09-26 17:23:49.871  INFO 9808 --- [main] com.slipper.weblog.WeblogApplication     : Started WeblogApplication in 2.353 seconds (JVM running for 2.981)
+2025-09-26 17:24:08.787  INFO 9808 --- [http-nio-8830-exec-1] o.a.c.c.C.[.[localhost].[/slipper]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-26 17:24:08.787  INFO 9808 --- [http-nio-8830-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-09-26 17:24:08.788  INFO 9808 --- [http-nio-8830-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-09-26 17:24:08.868  INFO 9808 --- [http-nio-8830-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-09-26 17:24:09.084  INFO 9808 --- [http-nio-8830-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-09-26 17:24:09.089 DEBUG 9808 --- [http-nio-8830-exec-1] c.s.w.m.t.mapper.TokenMapper.selectList  : ==>  Preparing: SELECT id,token,expire_at,created_at,creator,updated_at,updater,deleted,deleter FROM token WHERE deleted=0 AND (token = ?)
+2025-09-26 17:24:09.106 DEBUG 9808 --- [http-nio-8830-exec-1] c.s.w.m.t.mapper.TokenMapper.selectList  : ==> Parameters: null
+2025-09-26 17:24:09.129 DEBUG 9808 --- [http-nio-8830-exec-1] c.s.w.m.t.mapper.TokenMapper.selectList  : <==      Total: 0
