@@ -1,0 +1,71 @@
+{
+  "groups": [
+    {
+      "name": "json-web-token",
+      "type": "com.slipper.weblog.core.jwt.properties.JsonWebToken",
+      "sourceType": "com.slipper.weblog.core.jwt.properties.JsonWebToken"
+    },
+    {
+      "name": "mail",
+      "type": "com.slipper.weblog.modules.mail.config.MailConfig",
+      "sourceType": "com.slipper.weblog.modules.mail.config.MailConfig"
+    }
+  ],
+  "properties": [
+    {
+      "name": "json-web-token.expire",
+      "type": "java.lang.Long",
+      "description": "过期是时间（秒）",
+      "sourceType": "com.slipper.weblog.core.jwt.properties.JsonWebToken"
+    },
+    {
+      "name": "json-web-token.key",
+      "type": "java.lang.String",
+      "description": "token 键值",
+      "sourceType": "com.slipper.weblog.core.jwt.properties.JsonWebToken"
+    },
+    {
+      "name": "json-web-token.secret",
+      "type": "java.lang.String",
+      "description": "秘钥",
+      "sourceType": "com.slipper.weblog.core.jwt.properties.JsonWebToken"
+    },
+    {
+      "name": "mail.email",
+      "type": "java.lang.String",
+      "description": "邮箱地址",
+      "sourceType": "com.slipper.weblog.modules.mail.config.MailConfig"
+    },
+    {
+      "name": "mail.host",
+      "type": "java.lang.String",
+      "description": "主机",
+      "sourceType": "com.slipper.weblog.modules.mail.config.MailConfig"
+    },
+    {
+      "name": "mail.password",
+      "type": "java.lang.String",
+      "description": "密码",
+      "sourceType": "com.slipper.weblog.modules.mail.config.MailConfig"
+    },
+    {
+      "name": "mail.port",
+      "type": "java.lang.Integer",
+      "description": "端口",
+      "sourceType": "com.slipper.weblog.modules.mail.config.MailConfig"
+    },
+    {
+      "name": "mail.protocol",
+      "type": "java.lang.String",
+      "description": "协议",
+      "sourceType": "com.slipper.weblog.modules.mail.config.MailConfig"
+    },
+    {
+      "name": "mail.username",
+      "type": "java.lang.String",
+      "description": "用户名",
+      "sourceType": "com.slipper.weblog.modules.mail.config.MailConfig"
+    }
+  ],
+  "hints": []
+}
