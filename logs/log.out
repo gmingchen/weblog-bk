@@ -5718,5 +5718,8 @@ This generated password is for development use only. Your security configuration
 2025-09-26 17:24:09.089 DEBUG 9808 --- [http-nio-8830-exec-1] c.s.w.m.t.mapper.TokenMapper.selectList  : ==>  Preparing: SELECT id,token,expire_at,created_at,creator,updated_at,updater,deleted,deleter FROM token WHERE deleted=0 AND (token = ?)
 2025-09-26 17:24:09.106 DEBUG 9808 --- [http-nio-8830-exec-1] c.s.w.m.t.mapper.TokenMapper.selectList  : ==> Parameters: null
 2025-09-26 17:24:09.129 DEBUG 9808 --- [http-nio-8830-exec-1] c.s.w.m.t.mapper.TokenMapper.selectList  : <==      Total: 0
+<<<<<<< HEAD
 2025-09-26 23:16:03.540  INFO 9808 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2025-09-26 23:16:03.543  INFO 9808 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+=======
+>>>>>>> master

@@ -1,0 +1,10 @@
+service:
+  port: 8830
+  context-path: /slipper
+
+database:
+  ip: 139.196.182.46
+  port: 3306
+  name: weblog
+  username: root
+  password: ll5271211314
