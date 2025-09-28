@@ -2,7 +2,7 @@ package com.slipper.weblog.common.utils;
 
 import cn.hutool.http.useragent.UserAgent;
 import cn.hutool.http.useragent.UserAgentUtil;
-import cn.hutool.json.JSONUtil;
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -10,11 +10,11 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
+/**
+ * @author gumingchen
+ */
 public class HttpContextUtils {
     /**
      * 获取 HttpServletRequest
@@ -142,26 +142,23 @@ public class HttpContextUtils {
                     return map;
                 }).orElse(null);
     }
+
     /**
-     * 获取Body参数
+     * 获取String Body
      * @return
      */
-    public static Map<Object, Object> getBodyParams() {
+    public static String getStringBody() {
         return Optional.ofNullable(getHttpServletRequest())
                 .map(request -> {
-                    Map<Object,Object> params = new HashMap<>(0);
                     BufferedReader bufferedReader = null;
                     try {
                         bufferedReader = request.getReader();
                         String temp;
-                        StringBuilder stringParams = new StringBuilder();
+                        StringBuilder body = new StringBuilder();
                         while((temp = bufferedReader.readLine()) != null){
-                            stringParams.append(temp);
+                            body.append(temp);
                         }
-                        if(StringUtils.isNotBlank(stringParams.toString())){
-                            params = JSONUtil.toBean(stringParams.toString(), Map.class);
-                        }
-
+                        return body.toString();
                     } catch (IOException e) {
                         e.printStackTrace();
                     } finally {
@@ -173,7 +170,33 @@ public class HttpContextUtils {
                             }
                         }
                     }
-                    return params;
+                    return null;
+                }).orElse(null);
+    }
+    /**
+     * 获取Object Body
+     * @return
+     */
+    public static <T> T getObjectBody(Class<T> clazz) {
+        return Optional.ofNullable(getStringBody())
+                .map(body -> {
+                    if(StringUtils.isNotBlank(body)){
+                        return JSON.parseObject(body, clazz);
+                    }
+                    return null;
+                }).orElse(null);
+    }
+    /**
+     * 获取List Body
+     * @return
+     */
+    public static <T> List<T> getListBody(Class<T> clazz) {
+        return Optional.ofNullable(getStringBody())
+                .map(body -> {
+                    if(StringUtils.isNotBlank(body)){
+                        return JSON.parseArray(body, clazz);
+                    }
+                    return null;
                 }).orElse(null);
     }
 

@@ -1,5 +1,6 @@
 package com.slipper.weblog.modules.auth.service;
 
+import com.slipper.weblog.modules.auth.model.dto.LoginUserDTO;
 import com.slipper.weblog.modules.auth.model.dto.TokenDTO;
 import com.slipper.weblog.modules.auth.model.vo.CaptchaReqVO;
 import com.slipper.weblog.modules.auth.model.vo.EmailLoginVO;
@@ -38,6 +39,12 @@ public interface AuthService {
      * @return
      */
     TokenDTO qqLogin(QqLoginVO vo);
+
+    /**
+     * 获取登录用户信息
+     * @return
+     */
+    LoginUserDTO getLoginUser();
 
     /**
      * 校验token

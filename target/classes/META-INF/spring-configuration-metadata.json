@@ -9,6 +9,11 @@
       "name": "mail",
       "type": "com.slipper.weblog.modules.mail.config.MailConfig",
       "sourceType": "com.slipper.weblog.modules.mail.config.MailConfig"
+    },
+    {
+      "name": "qq",
+      "type": "com.slipper.weblog.modules.auth.config.QqConfig",
+      "sourceType": "com.slipper.weblog.modules.auth.config.QqConfig"
     }
   ],
   "properties": [
@@ -65,6 +70,18 @@
       "type": "java.lang.String",
       "description": "用户名",
       "sourceType": "com.slipper.weblog.modules.mail.config.MailConfig"
+    },
+    {
+      "name": "qq.app-id",
+      "type": "java.lang.String",
+      "description": "QQ互联 APP ID",
+      "sourceType": "com.slipper.weblog.modules.auth.config.QqConfig"
+    },
+    {
+      "name": "qq.app-key",
+      "type": "java.lang.String",
+      "description": "QQ互联 APP Key",
+      "sourceType": "com.slipper.weblog.modules.auth.config.QqConfig"
     }
   ],
   "hints": []

@@ -21,7 +21,9 @@ public enum ResultCodeEnum {
     FILE_SAVE_ERROR(4003, "保存文件失败！"),
 
     NOT_LOGIN(5000, "还未登录，请先登录！"),
-    TOKEN_EXPIRE(5001, "凭证已过期，请重新登录！");
+    TOKEN_EXPIRE(5001, "凭证已过期，请重新登录！"),
+    CAPTCHA_ERROR(5002, "验证码错误！"),
+    CAPTCHA_EXIST_ERROR(5003, "验证码已存在！");
     /**
      * 状态码
      */

@@ -11,7 +11,7 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-09-26T10:38:06+0800",
+    date = "2025-09-28T11:14:13+0800",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 1.8.0_291 (Oracle Corporation)"
 )
 public class AuthConvertImpl implements AuthConvert {
@@ -25,6 +25,7 @@ public class AuthConvertImpl implements AuthConvert {
         EmailLoginVO emailLoginVO = new EmailLoginVO();
 
         emailLoginVO.setEmail( bean.getEmail() );
+        emailLoginVO.setUuid( bean.getUuid() );
         emailLoginVO.setCaptcha( bean.getCaptcha() );
 
         return emailLoginVO;

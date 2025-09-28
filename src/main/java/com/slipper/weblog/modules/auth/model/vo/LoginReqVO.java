@@ -20,6 +20,10 @@ public class LoginReqVO implements Serializable {
      */
     private String email;
     /**
+     * uuid
+     */
+    private String uuid;
+    /**
      * 验证码
      */
     private String captcha;

@@ -58,6 +58,10 @@ json-web-token: # json web token
   secret: efe1679416b57fd5af7ee0969d79ec94bf40e0268ba423681f47e4e84bd352dc # 秘钥
   expire: 604800 # 过期是时间（秒）
 
+qq:
+  appId: 102121863 # QQ互联 APP ID
+  appKey: dCYlkW4PaXHnAICr # QQ互联 APP Key
+
 mail: # 邮箱配置
   email: gumingchen@foxmail.com # 邮箱地址
   username: gumingchen@foxmail.com # 用户名
@@ -65,5 +69,6 @@ mail: # 邮箱配置
   protocol: smtp # 协议
   host: smtp.qq.com # 主机
   port: 465 # 端口
+
 
 

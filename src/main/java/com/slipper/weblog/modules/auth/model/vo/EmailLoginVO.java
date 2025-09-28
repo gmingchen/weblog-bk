@@ -21,6 +21,11 @@ public class EmailLoginVO implements Serializable {
     @NotBlank(message = "邮箱不能为空")
     private String email;
     /**
+     * uuid
+     */
+    @NotBlank(message = "UUID不能为空")
+    private String uuid;
+    /**
      * 验证码
      */
     @NotBlank(message = "验证码不能为空")

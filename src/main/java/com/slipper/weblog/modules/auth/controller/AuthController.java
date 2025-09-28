@@ -1,16 +1,14 @@
 package com.slipper.weblog.modules.auth.controller;
 
 import com.slipper.weblog.common.pojo.Result;
+import com.slipper.weblog.modules.auth.model.dto.LoginUserDTO;
 import com.slipper.weblog.modules.auth.model.dto.TokenDTO;
 import com.slipper.weblog.modules.auth.model.vo.CaptchaReqVO;
 import com.slipper.weblog.modules.auth.model.vo.LoginReqVO;
 import com.slipper.weblog.modules.auth.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author gumingchen
@@ -32,6 +30,13 @@ public class AuthController {
     public Result<TokenDTO> login(@RequestBody @Validated LoginReqVO reqVO) {
         return Result.success(
                 authService.login(reqVO)
+        );
+    }
+
+    @GetMapping("/user")
+    public Result<LoginUserDTO> getUserInfo() {
+        return Result.success(
+                authService.getLoginUser()
         );
     }
 }

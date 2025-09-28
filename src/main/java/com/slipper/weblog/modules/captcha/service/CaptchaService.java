@@ -13,4 +13,18 @@ public interface CaptchaService extends IService<CaptchaEntity> {
      * @return
      */
     CaptchaEntity create(String uuid);
+
+    /**
+     * 刪除
+     * @param uuid UUID
+     */
+    void deleteByUuid(String uuid);
+
+    /**
+     * 验证验证码
+     * @param uuid UUID
+     * @param captcha 验证码
+     * @return
+     */
+    Boolean validate(String uuid, String captcha);
 }
