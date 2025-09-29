@@ -22,8 +22,8 @@ public class TagController {
     @Autowired
     private TagService tagService;
 
-//    @PreAuthorize("hasRole('ROLE_AUTHOR')")
-    @GetMapping("/pass/page")
+    @PreAuthorize("hasRole('ROLE_AUTHOR')")
+    @GetMapping("/page")
     public Result<PageResult<TagPageDTO>> page(@Validated TagPageReqVO reqVO) {
         return Result.success(
                 tagService.page(reqVO)
@@ -45,8 +45,8 @@ public class TagController {
         return Result.success();
     }
 
-    @GetMapping("/pass/select")
-    public Result<List<TagSelectDTO>> select() {
+    @GetMapping("/pass/list")
+    public Result<List<TagSelectDTO>> list() {
         return Result.success(
                 tagService.querySelectList()
         );
