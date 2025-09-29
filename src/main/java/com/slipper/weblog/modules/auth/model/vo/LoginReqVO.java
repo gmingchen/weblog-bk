@@ -32,7 +32,7 @@ public class LoginReqVO implements Serializable {
      */
     private String accessToken;
     /**
-     * 登录类型 1-微信 2-QQ
+     * 登录类型 1-邮箱 2-QQ
      */
     @NotNull(message = "登录类型不能为空")
     @Enum(LoginTypeEnum.class)
