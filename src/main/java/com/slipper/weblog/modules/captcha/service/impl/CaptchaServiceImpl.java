@@ -2,7 +2,7 @@ package com.slipper.weblog.modules.captcha.service.impl;
 
 import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.slipper.weblog.core.mybatisplus.expand.ServiceImplX;
 import com.slipper.weblog.common.enums.ResultCodeEnum;
 import com.slipper.weblog.exception.RunException;
 import com.slipper.weblog.modules.captcha.entity.CaptchaEntity;
@@ -18,7 +18,7 @@ import java.util.Optional;
  * @author gumingchen
  */
 @Service("captchaService")
-public class CaptchaServiceImpl extends ServiceImpl<CaptchaMapper, CaptchaEntity> implements CaptchaService {
+public class CaptchaServiceImpl extends ServiceImplX<CaptchaMapper, CaptchaEntity> implements CaptchaService {
 
     public static final long DURATION = 60 * 5;
 
