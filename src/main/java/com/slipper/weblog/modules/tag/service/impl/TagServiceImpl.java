@@ -5,6 +5,7 @@ import com.slipper.weblog.common.enums.StatusEnum;
 import com.slipper.weblog.common.pojo.PageResult;
 import com.slipper.weblog.core.mybatisplus.expand.LambdaQueryWrapperX;
 import com.slipper.weblog.core.mybatisplus.expand.ServiceImplX;
+import com.slipper.weblog.exception.RunException;
 import com.slipper.weblog.modules.tag.covert.TagConvert;
 import com.slipper.weblog.modules.tag.entity.TagEntity;
 import com.slipper.weblog.modules.tag.mapper.TagMapper;
@@ -13,6 +14,7 @@ import com.slipper.weblog.modules.tag.model.dto.TagSelectDTO;
 import com.slipper.weblog.modules.tag.model.vo.*;
 import com.slipper.weblog.modules.tag.service.TagService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -66,10 +68,12 @@ public class TagServiceImpl extends ServiceImplX<TagMapper, TagEntity> implement
         baseMapper.updateBatchById(list);
     }
 
+    @Transactional(rollbackFor = RunException.class)
     @Override
     public void delete(List<Long> ids) {
-        this.removeBatchByIds(ids);
-        baseMapper.deleteBatchIds();
+        for(Long id : ids) {
+            this.removeById(id);
+        }
     }
 
     @Override

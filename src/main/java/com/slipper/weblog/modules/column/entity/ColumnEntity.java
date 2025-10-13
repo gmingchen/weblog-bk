@@ -11,7 +11,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-@TableName("column")
+@TableName("`column`")
 public class ColumnEntity extends BaseEntity {
     /**
      * 名称

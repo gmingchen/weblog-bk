@@ -34,21 +34,13 @@ public class BaseEntity implements Serializable {
     /**
      * 更新者，用户ID
      */
-    @TableField(fill = FieldFill.UPDATE, jdbcType = JdbcType.BIGINT)
+    @TableField(fill = FieldFill.INSERT_UPDATE, jdbcType = JdbcType.BIGINT)
     private Long updater;
     /**
      * 最后更新时间
      */
-    @TableField(fill = FieldFill.UPDATE, jdbcType = JdbcType.TIMESTAMP)
+    @TableField(fill = FieldFill.INSERT_UPDATE, jdbcType = JdbcType.TIMESTAMP)
     private LocalDateTime updatedAt;
-    /**
-     * 更新者，用户ID
-     */
-    private Long deleter;
-    /**
-     * 删除时间
-     */
-    private LocalDateTime deletedAt;
     /**
      * 是否删除
      */

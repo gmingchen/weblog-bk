@@ -30,6 +30,12 @@ public class AutoFillHandler implements MetaObjectHandler {
                 if (Objects.nonNull(userEntity) && Objects.isNull(baseEntity.getCreator())) {
                     baseEntity.setCreator(userEntity.getId());
                 }
+                if (Objects.isNull(baseEntity.getUpdatedAt())) {
+                    baseEntity.setUpdatedAt(now);
+                }
+                if (Objects.nonNull(userEntity) && Objects.isNull(baseEntity.getUpdater())) {
+                    baseEntity.setUpdater(userEntity.getId());
+                }
             }
         }
     }

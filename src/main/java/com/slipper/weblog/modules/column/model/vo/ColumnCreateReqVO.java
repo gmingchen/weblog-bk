@@ -1,4 +1,4 @@
-package com.slipper.weblog.modules.tag.model.vo;
+package com.slipper.weblog.modules.column.model.vo;
 
 import com.slipper.weblog.common.enums.StatusEnum;
 import com.slipper.weblog.core.validator.constraints.Enum;
@@ -11,12 +11,21 @@ import javax.validation.constraints.NotNull;
  * @author gumingchen
  */
 @Data
-public class TagCreateReqVO {
+public class ColumnCreateReqVO {
     /**
      * 名称
      */
     @NotBlank(message = "名称不能为空")
     private String name;
+    /**
+     * 简介
+     */
+    private String introduction;
+    /**
+     * 封面图
+     */
+    @NotBlank(message = "封面图不能为空")
+    private String cover;
     /**
      * 排序：越大位置越靠前
      */
