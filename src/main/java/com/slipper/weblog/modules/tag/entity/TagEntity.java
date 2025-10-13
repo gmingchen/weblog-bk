@@ -18,6 +18,10 @@ public class TagEntity extends BaseEntity {
      */
     private String name;
     /**
+     * 排序：越大位置越靠前
+     */
+    private Integer sort;
+    /**
      * 状态：0-禁用 1-启用
      */
     private Integer status;

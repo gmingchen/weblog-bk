@@ -1,12 +1,12 @@
 package com.slipper.weblog.modules.captcha.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.slipper.weblog.core.mybatisplus.expand.IServiceX;
 import com.slipper.weblog.modules.captcha.entity.CaptchaEntity;
 
 /**
  * @author gumingchen
  */
-public interface CaptchaService extends IService<CaptchaEntity> {
+public interface CaptchaService extends IServiceX<CaptchaEntity> {
     /**
      * 新增验证码
      * @param uuid UUID

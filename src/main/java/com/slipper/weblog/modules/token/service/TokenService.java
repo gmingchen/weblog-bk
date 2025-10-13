@@ -1,12 +1,12 @@
 package com.slipper.weblog.modules.token.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.slipper.weblog.core.mybatisplus.expand.IServiceX;
 import com.slipper.weblog.modules.token.entity.TokenEntity;
 
 /**
  * @author gumingchen
  */
-public interface TokenService extends IService<TokenEntity> {
+public interface TokenService extends IServiceX<TokenEntity> {
     /**
      * 新增Token
      * @param userId 用户ID

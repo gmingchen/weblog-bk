@@ -1,13 +1,13 @@
 package com.slipper.weblog.modules.user.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.slipper.weblog.core.mybatisplus.expand.IServiceX;
 import com.slipper.weblog.modules.user.entity.UserEntity;
 import com.slipper.weblog.modules.user.model.dto.UserCreateDTO;
 
 /**
  * @author gumingchen
  */
-public interface UserService extends IService<UserEntity> {
+public interface UserService extends IServiceX<UserEntity> {
 
     /**
      * 通过用户邮箱查询用户

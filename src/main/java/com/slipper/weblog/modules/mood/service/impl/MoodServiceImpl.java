@@ -1,7 +1,7 @@
 package com.slipper.weblog.modules.mood.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.slipper.weblog.core.mybatisplus.expand.ServiceImplX;
 import com.slipper.weblog.common.enums.StatusEnum;
 import com.slipper.weblog.modules.mood.covert.MoodConvert;
 import com.slipper.weblog.modules.mood.entity.MoodEntity;
@@ -16,7 +16,7 @@ import java.util.List;
  * @author gumingchen
  */
 @Service("moodService")
-public class MoodServiceImpl extends ServiceImpl<MoodMapper, MoodEntity> implements MoodService {
+public class MoodServiceImpl extends ServiceImplX<MoodMapper, MoodEntity> implements MoodService {
 
     @Override
     public List<MoodDTO> queryList() {

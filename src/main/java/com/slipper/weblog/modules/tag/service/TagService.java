@@ -1,20 +1,18 @@
 package com.slipper.weblog.modules.tag.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.slipper.weblog.common.pojo.PageResult;
+import com.slipper.weblog.core.mybatisplus.expand.IServiceX;
 import com.slipper.weblog.modules.tag.entity.TagEntity;
 import com.slipper.weblog.modules.tag.model.dto.TagPageDTO;
 import com.slipper.weblog.modules.tag.model.dto.TagSelectDTO;
-import com.slipper.weblog.modules.tag.model.vo.TagCreateReqVO;
-import com.slipper.weblog.modules.tag.model.vo.TagPageReqVO;
-import com.slipper.weblog.modules.tag.model.vo.TagUpdateReqVO;
+import com.slipper.weblog.modules.tag.model.vo.*;
 
 import java.util.List;
 
 /**
  * @author gumingchen
  */
-public interface TagService extends IService<TagEntity> {
+public interface TagService extends IServiceX<TagEntity> {
 
     /**
      * 分页
@@ -35,6 +33,18 @@ public interface TagService extends IService<TagEntity> {
      * @param reqVO 参数
      */
     void update(TagUpdateReqVO reqVO);
+
+    /**
+     * 更新排序
+     * @param reqVO 参数
+     */
+    void updateSort(TagUpdateSortReqVO reqVO);
+
+    /**
+     * 更新状态
+     * @param reqVO 参数
+     */
+    void updateStatus(TagUpdateStatusReqVO reqVO);
 
     /**
      * 删除

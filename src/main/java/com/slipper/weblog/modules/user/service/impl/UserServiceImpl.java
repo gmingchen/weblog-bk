@@ -1,7 +1,7 @@
 package com.slipper.weblog.modules.user.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.slipper.weblog.core.mybatisplus.expand.ServiceImplX;
 import com.slipper.weblog.modules.user.covert.UserConvert;
 import com.slipper.weblog.modules.user.entity.UserEntity;
 import com.slipper.weblog.modules.user.mapper.UserMapper;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
  * @author gumingchen
  */
 @Service("userService")
-public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> implements UserService {
+public class UserServiceImpl extends ServiceImplX<UserMapper, UserEntity> implements UserService {
 
     @Override
     public UserEntity queryUserByEmail(String email) {

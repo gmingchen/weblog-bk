@@ -4,6 +4,9 @@ import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * @author gumingchen
+ */
 @Data
 public class TagUpdateReqVO extends TagCreateReqVO  {
     /**

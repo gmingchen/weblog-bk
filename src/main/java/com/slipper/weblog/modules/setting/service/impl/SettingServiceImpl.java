@@ -2,8 +2,8 @@ package com.slipper.weblog.modules.setting.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.slipper.weblog.common.enums.SettingEnum;
+import com.slipper.weblog.core.mybatisplus.expand.ServiceImplX;
 import com.slipper.weblog.core.validator.ValidatorUtils;
 import com.slipper.weblog.modules.setting.entity.SettingEntity;
 import com.slipper.weblog.modules.setting.mapper.SettingMapper;
@@ -21,7 +21,7 @@ import java.util.List;
  * @author gumingchen
  */
 @Service("settingService")
-public class SettingServiceImpl extends ServiceImpl<SettingMapper, SettingEntity> implements SettingService {
+public class SettingServiceImpl extends ServiceImplX<SettingMapper, SettingEntity> implements SettingService {
 
     @Override
     public void update(List<SettingUpdateReqVO> list) {

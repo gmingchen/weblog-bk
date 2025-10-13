@@ -1,6 +1,6 @@
 package com.slipper.weblog.modules.setting.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.slipper.weblog.core.mybatisplus.expand.IServiceX;
 import com.slipper.weblog.modules.setting.entity.SettingEntity;
 import com.slipper.weblog.modules.setting.model.vo.SettingUpdateReqVO;
 
@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @author gumingchen
  */
-public interface SettingService extends IService<SettingEntity> {
+public interface SettingService extends IServiceX<SettingEntity> {
 
     /**
      * 更新配置

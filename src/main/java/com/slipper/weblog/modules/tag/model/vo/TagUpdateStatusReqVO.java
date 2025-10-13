@@ -4,27 +4,25 @@ import com.slipper.weblog.common.enums.StatusEnum;
 import com.slipper.weblog.core.validator.constraints.Enum;
 import lombok.Data;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.List;
 
 /**
  * @author gumingchen
  */
 @Data
-public class TagCreateReqVO {
+public class TagUpdateStatusReqVO {
     /**
-     * 名称
+     * ID数组
      */
-    @NotBlank(message = "名称不能为空")
-    private String name;
-    /**
-     * 排序：越大位置越靠前
-     */
-    private Integer sort;
+    @NotNull(message = "ID不能为空")
+    @Size(min = 1, message = "至少有一个ID")
+    private List<Long> ids;
     /**
      * 状态：0-禁用 1-启用
      */
-    @Enum(StatusEnum.class)
     @NotNull(message = "状态不能为空")
+    @Enum(StatusEnum.class)
     private Integer status;
 }

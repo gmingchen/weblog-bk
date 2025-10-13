@@ -10,11 +10,17 @@ import com.baomidou.mybatisplus.extension.toolkit.Db;
 import com.slipper.weblog.common.pojo.PageParam;
 import com.slipper.weblog.common.pojo.PageResult;
 import com.slipper.weblog.core.mybatisplus.utils.MyBatisUtils;
+import com.slipper.weblog.exception.RunException;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * @author gumingchen
+ */
 public interface BaseMapperX<T> extends BaseMapper<T> {
     /**
      * 分页查询
@@ -95,5 +101,19 @@ public interface BaseMapperX<T> extends BaseMapper<T> {
             return null;
         }
         return list.get(0);
+    }
+
+    /**
+     * 批量删除 目的是为了触发自动填充
+     * @param idList id
+     * @return
+     */
+    @Transactional(rollbackFor = RunException.class)
+    @Override
+    default int deleteBatchIds(Collection<?> idList) {
+        for(Object id : idList) {
+            this.deleteById((T) id);
+        }
+        return idList.size();
     }
 }

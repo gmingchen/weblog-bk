@@ -1,7 +1,7 @@
 package com.slipper.weblog.modules.token.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.slipper.weblog.core.mybatisplus.expand.ServiceImplX;
 import com.slipper.weblog.core.jwt.utils.JwtUtils;
 import com.slipper.weblog.modules.token.entity.TokenEntity;
 import com.slipper.weblog.modules.token.mapper.TokenMapper;
@@ -16,7 +16,7 @@ import java.util.Optional;
  * @author gumingchen
  */
 @Service("tokenService")
-public class TokenServiceImpl extends ServiceImpl<TokenMapper, TokenEntity> implements TokenService {
+public class TokenServiceImpl extends ServiceImplX<TokenMapper, TokenEntity> implements TokenService {
 
     @Autowired
     private JwtUtils jwtUtils;

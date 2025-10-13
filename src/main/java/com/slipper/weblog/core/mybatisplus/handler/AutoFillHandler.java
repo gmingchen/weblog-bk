@@ -27,15 +27,8 @@ public class AutoFillHandler implements MetaObjectHandler {
                 if (Objects.isNull(baseEntity.getCreatedAt())) {
                     baseEntity.setCreatedAt(now);
                 }
-                if (Objects.isNull(baseEntity.getUpdatedAt())) {
-                    baseEntity.setUpdatedAt(now);
-                }
-                // 如果创建者和更新者为空 且 当前登录人ID不为空 则 自动填充当前登录人ID
                 if (Objects.nonNull(userEntity) && Objects.isNull(baseEntity.getCreator())) {
                     baseEntity.setCreator(userEntity.getId());
-                }
-                if (Objects.nonNull(userEntity) && Objects.isNull(baseEntity.getUpdater())) {
-                    baseEntity.setUpdater(baseEntity.getId());
                 }
             }
         }
@@ -43,16 +36,20 @@ public class AutoFillHandler implements MetaObjectHandler {
 
     @Override
     public void updateFill(MetaObject metaObject) {
-        // 如果时间为空 则 自动填充当前时间
-        Object updateAt = getFieldValByName("updatedAt", metaObject);
-        if (Objects.isNull(updateAt)) {
-            setFieldValByName("updatedAt", LocalDateTime.now(), metaObject);
-        }
-        // 如果更新者为空 且 当前登录人ID不为空 则 自动填充当前登录人ID
-        Object updater = getFieldValByName("updater", metaObject);
-        Long id = SecurityUtils.getLoginUserId();
-        if (Objects.nonNull(id) && Objects.isNull(updater)) {
-            setFieldValByName("updater", id.toString(), metaObject);
+        if (Objects.nonNull(metaObject)) {
+            UserEntity userEntity = SecurityUtils.getLoginUser();
+            // 基础字段自动填充
+            if (metaObject.getOriginalObject() instanceof BaseEntity) {
+                BaseEntity baseEntity = (BaseEntity) metaObject.getOriginalObject();
+                // 如果时间为空 则 自动填充当前时间
+                LocalDateTime now = LocalDateTime.now();
+                if (Objects.isNull(baseEntity.getUpdatedAt())) {
+                   baseEntity.setUpdatedAt(now);
+                }
+                if (Objects.nonNull(userEntity) && Objects.isNull(baseEntity.getUpdater())) {
+                   baseEntity.setUpdater(userEntity.getId());
+                }
+            }
         }
     }
 }

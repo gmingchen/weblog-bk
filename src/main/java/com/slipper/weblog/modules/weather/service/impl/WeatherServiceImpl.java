@@ -1,7 +1,7 @@
 package com.slipper.weblog.modules.weather.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.slipper.weblog.core.mybatisplus.expand.ServiceImplX;
 import com.slipper.weblog.common.enums.StatusEnum;
 import com.slipper.weblog.modules.weather.covert.WeatherConvert;
 import com.slipper.weblog.modules.weather.entity.WeatherEntity;
@@ -16,7 +16,7 @@ import java.util.List;
  * @author gumingchen
  */
 @Service("weatherService")
-public class WeatherServiceImpl extends ServiceImpl<WeatherMapper, WeatherEntity> implements WeatherService {
+public class WeatherServiceImpl extends ServiceImplX<WeatherMapper, WeatherEntity> implements WeatherService {
 
     @Override
     public List<WeatherDTO> queryList() {
