@@ -52,7 +52,7 @@ public class AutoFillHandler implements MetaObjectHandler {
         Object updater = getFieldValByName("updater", metaObject);
         Long id = SecurityUtils.getLoginUserId();
         if (Objects.nonNull(id) && Objects.isNull(updater)) {
-            setFieldValByName("updater", id.toString(), metaObject);
+            setFieldValByName("updater", id, metaObject);
         }
     }
 }
