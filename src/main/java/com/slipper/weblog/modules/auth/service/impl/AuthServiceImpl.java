@@ -25,6 +25,7 @@ import com.slipper.weblog.modules.captcha.entity.CaptchaEntity;
 import com.slipper.weblog.modules.captcha.service.CaptchaService;
 import com.slipper.weblog.modules.mail.service.MailService;
 import com.slipper.weblog.modules.setting.entity.SettingEntity;
+import com.slipper.weblog.modules.setting.model.dto.EmailCaptchaSetting;
 import com.slipper.weblog.modules.setting.model.dto.EmailSetting;
 import com.slipper.weblog.modules.setting.service.SettingService;
 import com.slipper.weblog.modules.token.entity.TokenEntity;
@@ -56,21 +57,11 @@ public class AuthServiceImpl implements AuthService {
     private MailService mailService;
     @Autowired
     private QqConfig qqConfig;
-    @Autowired
-    private SettingService settingService;
 
     @Override
     public void sendCaptcha(CaptchaReqVO reqVO) {
         CaptchaEntity captchaEntity = captchaService.create(reqVO.getUuid());
-
-        EmailSetting setting = mailService.getSetting();
-
-        SettingEntity settingEntity = settingService.queryByCode(SettingEnum.EMAIL_CAPTCHA.getCode(), EmailSetting.class);
-
-        String reg = "\\$\\{captcha\\}";
-        String content = setting.getContent().replaceFirst(reg, Matcher.quoteReplacement(captchaEntity.getCode()));
-
-        mailService.send(reqVO.getEmail(), setting.getTitle(), content);
+        mailService.sendCaptcha(reqVO.getEmail(), captchaEntity.getCode());
     }
 
     @Override

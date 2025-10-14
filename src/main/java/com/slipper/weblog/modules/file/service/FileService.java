@@ -1,5 +1,7 @@
 package com.slipper.weblog.modules.file.service;
 
+import com.slipper.weblog.modules.setting.model.dto.EmailSetting;
+import com.slipper.weblog.modules.setting.model.dto.FileLocalSetting;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -13,4 +15,10 @@ public interface FileService {
      * @return
      */
     String create(MultipartFile file);
+
+    /**
+     * 获取配置
+     * @return
+     */
+    FileLocalSetting getSetting();
 }

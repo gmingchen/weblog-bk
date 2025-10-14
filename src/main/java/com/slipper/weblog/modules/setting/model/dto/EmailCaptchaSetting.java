@@ -1,12 +1,14 @@
 package com.slipper.weblog.modules.setting.model.dto;
 
 import com.slipper.weblog.modules.setting.model.SettingValue;
+import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 
 /**
  * @author gumingchen
  */
+@Data
 public class EmailCaptchaSetting implements SettingValue {
     /**
      * 标题

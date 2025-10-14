@@ -6,11 +6,14 @@ import com.slipper.weblog.common.enums.SettingEnum;
 import com.slipper.weblog.modules.mail.config.MailConfig;
 import com.slipper.weblog.modules.mail.service.MailService;
 import com.slipper.weblog.modules.setting.entity.SettingEntity;
+import com.slipper.weblog.modules.setting.model.dto.EmailCaptchaSetting;
 import com.slipper.weblog.modules.setting.model.dto.EmailSetting;
 import com.slipper.weblog.modules.setting.service.SettingService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.regex.Matcher;
 
 /**
  * @author gumingchen
@@ -39,21 +42,29 @@ public class MailServiceImpl implements MailService {
     }
 
     @Override
+    public void sendCaptcha(String email, String captcha) {
+        EmailCaptchaSetting emailCaptchaSetting = settingService.queryByCode(SettingEnum.EMAIL_CAPTCHA.getCode(), EmailCaptchaSetting.class);
+
+        String reg = "\\$\\{captcha\\}";
+        String content = emailCaptchaSetting.getContent().replaceFirst(reg, Matcher.quoteReplacement(captcha));
+
+        this.send(email, emailCaptchaSetting.getTitle(), content);
+    }
+
+    @Override
     public EmailSetting getSetting() {
-        EmailSetting setting = settingService.queryByCode(SettingEnum.EMAIL.getCode(), EmailSetting.class);
-        if (settingEntity == null) {
-            setting = new EmailSetting();
-        } else {
-            setting = (EmailSetting) settingEntity.getValue();
+        EmailSetting emailSetting = settingService.queryByCode(SettingEnum.EMAIL.getCode(), EmailSetting.class);
+        if (emailSetting == null) {
+            emailSetting = new EmailSetting();
         }
 
-        setting.setEmail(StringUtils.isNotBlank(setting.getEmail()) ? setting.getEmail() : mailConfig.getEmail())
-                .setUsername(StringUtils.isNotBlank(setting.getUsername()) ? setting.getUsername() : mailConfig.getUsername())
-                .setPassword(StringUtils.isNotBlank(setting.getPassword()) ? setting.getPassword() : mailConfig.getPassword())
-                .setProtocol(StringUtils.isNotBlank(setting.getProtocol()) ? setting.getProtocol() : mailConfig.getProtocol())
-                .setHost(StringUtils.isNotBlank(setting.getHost()) ? setting.getHost() : mailConfig.getHost())
-                .setPort(setting.getPort() != null ? setting.getPort() : mailConfig.getPort());
+        emailSetting.setEmail(StringUtils.isNotBlank(emailSetting.getEmail()) ? emailSetting.getEmail() : mailConfig.getEmail())
+                .setUsername(StringUtils.isNotBlank(emailSetting.getUsername()) ? emailSetting.getUsername() : mailConfig.getUsername())
+                .setPassword(StringUtils.isNotBlank(emailSetting.getPassword()) ? emailSetting.getPassword() : mailConfig.getPassword())
+                .setProtocol(StringUtils.isNotBlank(emailSetting.getProtocol()) ? emailSetting.getProtocol() : mailConfig.getProtocol())
+                .setHost(StringUtils.isNotBlank(emailSetting.getHost()) ? emailSetting.getHost() : mailConfig.getHost())
+                .setPort(emailSetting.getPort() != null ? emailSetting.getPort() : mailConfig.getPort());
 
-        return setting;
+        return emailSetting;
     }
 }

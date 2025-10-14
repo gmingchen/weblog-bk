@@ -62,7 +62,7 @@ public class SettingServiceImpl extends ServiceImplX<SettingMapper, SettingEntit
 
     @Override
     public <T> T queryByCode(Integer code, Class<T> clazz) {
-        SettingEntity settingEntity = this.queryByCode(SettingEnum.EMAIL.getCode());
+        SettingEntity settingEntity = this.queryByCode(code);
         if (settingEntity != null) {
             return JSON.parseObject(JSON.toJSONString(settingEntity.getValue()), clazz);
         }

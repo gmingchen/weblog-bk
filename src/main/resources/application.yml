@@ -58,6 +58,11 @@ json-web-token: # json web token
   secret: efe1679416b57fd5af7ee0969d79ec94bf40e0268ba423681f47e4e84bd352dc # 秘钥
   expire: 604800 # 过期是时间（秒）(7天)
 
+file: # 文件上传配置
+  domain: https://weblog.gumingchen.icu # 域名
+  url: /file # 虚拟路径路径
+  path: E:/github/weblog-bk # 物理路径
+
 mail: # 邮箱配置
   email: gumingchen@foxmail.com # 邮箱地址
   username: gumingchen@foxmail.com # 用户名

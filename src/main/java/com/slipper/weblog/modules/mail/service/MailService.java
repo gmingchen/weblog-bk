@@ -15,6 +15,13 @@ public interface MailService {
     void send(String email, String title, String content);
 
     /**
+     * 发送验证码
+     * @param email 邮箱
+     * @param captcha 验证码
+     */
+    void sendCaptcha(String email, String captcha);
+
+    /**
      * 获取配置
      * @return
      */
