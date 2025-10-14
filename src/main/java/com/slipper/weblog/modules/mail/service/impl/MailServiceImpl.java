@@ -22,7 +22,6 @@ public class MailServiceImpl implements MailService {
     @Autowired
     private SettingService settingService;
 
-
     @Override
     public void send(String email, String title, String content) {
         EmailSetting setting = this.getSetting();
@@ -41,10 +40,11 @@ public class MailServiceImpl implements MailService {
 
     @Override
     public EmailSetting getSetting() {
-        SettingEntity settingEntity = settingService.queryByCode(SettingEnum.EMAIL.getCode());
-        EmailSetting setting = (EmailSetting) settingEntity.getValue();
-        if (setting == null) {
+        EmailSetting setting = settingService.queryByCode(SettingEnum.EMAIL.getCode(), EmailSetting.class);
+        if (settingEntity == null) {
             setting = new EmailSetting();
+        } else {
+            setting = (EmailSetting) settingEntity.getValue();
         }
 
         setting.setEmail(StringUtils.isNotBlank(setting.getEmail()) ? setting.getEmail() : mailConfig.getEmail())

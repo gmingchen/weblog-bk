@@ -43,14 +43,5 @@ public class EmailSetting implements SettingValue {
      */
     @NotNull(message = "端口不能为空")
     private Integer port;
-    /**
-     * 标题
-     */
-    @NotBlank(message = "标题不能为空")
-    private String title;
-    /**
-     * 内容
-     */
-    @NotBlank(message = "内容不能为空")
-    private String content;
+
 }

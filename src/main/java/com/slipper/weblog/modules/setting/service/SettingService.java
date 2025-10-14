@@ -23,4 +23,13 @@ public interface SettingService extends IServiceX<SettingEntity> {
      * @return
      */
     SettingEntity queryByCode(Integer code);
+
+    /**
+     * 通过Code编码查询配置
+     * @param code 编码
+     * @param clazz 类
+     * @param <T>
+     * @return
+     */
+    <T> T queryByCode(Integer code, Class<T> clazz);
 }

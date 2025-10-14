@@ -2,6 +2,7 @@ package com.slipper.weblog.common.enums;
 
 import cn.hutool.core.util.ArrayUtil;
 import com.slipper.weblog.modules.setting.model.SettingValue;
+import com.slipper.weblog.modules.setting.model.dto.EmailCaptchaSetting;
 import com.slipper.weblog.modules.setting.model.dto.EmailSetting;
 import com.slipper.weblog.modules.setting.model.dto.FileLocalSetting;
 import lombok.AllArgsConstructor;
@@ -16,7 +17,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum SettingEnum implements EnumIntArray {
     FILE(1, FileLocalSetting.class),
-    EMAIL(2, EmailSetting.class)
+    EMAIL(2, EmailSetting.class),
+    EMAIL_CAPTCHA(3, EmailCaptchaSetting.class),
     ;
     /**
      * key

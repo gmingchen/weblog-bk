@@ -20,9 +20,9 @@ public class TokenDTO implements Serializable {
     /**
      * 生成的 Token
      */
-    private String token;
+    private String accessToken;
     /**
      * Token 过期时间
      */
-    private LocalDateTime expiredAt;
+    private LocalDateTime accessExpiredAt;
 }

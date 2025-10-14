@@ -8,6 +8,7 @@ import com.slipper.weblog.core.validator.ValidatorUtils;
 import com.slipper.weblog.modules.setting.entity.SettingEntity;
 import com.slipper.weblog.modules.setting.mapper.SettingMapper;
 import com.slipper.weblog.modules.setting.model.SettingValue;
+import com.slipper.weblog.modules.setting.model.dto.EmailSetting;
 import com.slipper.weblog.modules.setting.model.vo.SettingUpdateReqVO;
 import com.slipper.weblog.modules.setting.service.SettingService;
 import org.springframework.stereotype.Service;
@@ -43,7 +44,6 @@ public class SettingServiceImpl extends ServiceImplX<SettingMapper, SettingEntit
                     .setCode(reqVO.getCode())
                     .setValue(settingValue);
 
-
             SettingEntity setting = this.queryByCode(reqVO.getCode());
             if (setting != null) {
                 settingEntity.setId(setting.getId());
@@ -58,5 +58,14 @@ public class SettingServiceImpl extends ServiceImplX<SettingMapper, SettingEntit
         LambdaQueryWrapper<SettingEntity> wrapper = new LambdaQueryWrapper<SettingEntity>()
                 .eq(SettingEntity::getCode, code);
         return baseMapper.selectOne(wrapper);
+    }
+
+    @Override
+    public <T> T queryByCode(Integer code, Class<T> clazz) {
+        SettingEntity settingEntity = this.queryByCode(SettingEnum.EMAIL.getCode());
+        if (settingEntity != null) {
+            return JSON.parseObject(JSON.toJSONString(settingEntity.getValue()), clazz);
+        }
+        return null;
     }
 }

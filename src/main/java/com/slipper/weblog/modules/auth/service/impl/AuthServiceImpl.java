@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.slipper.weblog.common.enums.LoginTypeEnum;
 import com.slipper.weblog.common.enums.ResultCodeEnum;
+import com.slipper.weblog.common.enums.SettingEnum;
 import com.slipper.weblog.common.enums.SexEnum;
 import com.slipper.weblog.core.security.utils.SecurityUtils;
 import com.slipper.weblog.core.validator.ValidatorUtils;
@@ -23,7 +24,9 @@ import com.slipper.weblog.modules.auth.service.AuthService;
 import com.slipper.weblog.modules.captcha.entity.CaptchaEntity;
 import com.slipper.weblog.modules.captcha.service.CaptchaService;
 import com.slipper.weblog.modules.mail.service.MailService;
+import com.slipper.weblog.modules.setting.entity.SettingEntity;
 import com.slipper.weblog.modules.setting.model.dto.EmailSetting;
+import com.slipper.weblog.modules.setting.service.SettingService;
 import com.slipper.weblog.modules.token.entity.TokenEntity;
 import com.slipper.weblog.modules.token.service.TokenService;
 import com.slipper.weblog.modules.user.entity.UserEntity;
@@ -53,12 +56,16 @@ public class AuthServiceImpl implements AuthService {
     private MailService mailService;
     @Autowired
     private QqConfig qqConfig;
+    @Autowired
+    private SettingService settingService;
 
     @Override
     public void sendCaptcha(CaptchaReqVO reqVO) {
         CaptchaEntity captchaEntity = captchaService.create(reqVO.getUuid());
 
         EmailSetting setting = mailService.getSetting();
+
+        SettingEntity settingEntity = settingService.queryByCode(SettingEnum.EMAIL_CAPTCHA.getCode(), EmailSetting.class);
 
         String reg = "\\$\\{captcha\\}";
         String content = setting.getContent().replaceFirst(reg, Matcher.quoteReplacement(captchaEntity.getCode()));

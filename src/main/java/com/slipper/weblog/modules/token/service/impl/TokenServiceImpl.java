@@ -26,8 +26,8 @@ public class TokenServiceImpl extends ServiceImplX<TokenMapper, TokenEntity> imp
         String tokenStr = jwtUtils.generate(userId);
 
         TokenEntity tokenEntity = new TokenEntity()
-                .setToken(tokenStr)
-                .setExpireAt(jwtUtils.getExpire(tokenStr));
+                .setAccessToken(tokenStr)
+                .setAccessExpiredAt(jwtUtils.getExpire(tokenStr));
         tokenEntity.setCreator(userId);
 
         LambdaQueryWrapper<TokenEntity> wrapper = new LambdaQueryWrapper<TokenEntity>()
@@ -45,7 +45,7 @@ public class TokenServiceImpl extends ServiceImplX<TokenMapper, TokenEntity> imp
     @Override
     public TokenEntity queryByToken(String token) {
         LambdaQueryWrapper<TokenEntity> wrapper = new LambdaQueryWrapper<TokenEntity>()
-                .eq(TokenEntity::getToken, token);
+                .eq(TokenEntity::getAccessToken, token);
         return baseMapper.selectOne(wrapper);
     }
 
@@ -59,7 +59,7 @@ public class TokenServiceImpl extends ServiceImplX<TokenMapper, TokenEntity> imp
     public Boolean validate(String token) {
         TokenEntity tokenEntity = this.queryByToken(token);
         return Optional.ofNullable(tokenEntity)
-                .map(w -> w.getExpireAt().isAfter(LocalDateTime.now()) && jwtUtils.validate(token))
+                .map(w -> w.getAccessExpiredAt().isAfter(LocalDateTime.now()) && jwtUtils.validate(token))
                 .orElse(false);
     }
 }

@@ -34,7 +34,7 @@ public class CaptchaServiceImpl extends ServiceImplX<CaptchaMapper, CaptchaEntit
         captchaEntity = new CaptchaEntity()
                 .setUuid(uuid)
                 .setCode(captcha)
-                .setExpireAt(LocalDateTime.now().plusSeconds(DURATION));
+                .setExpiredAt(LocalDateTime.now().plusSeconds(DURATION));
         baseMapper.insert(captchaEntity);
 
         return captchaEntity;
@@ -61,7 +61,7 @@ public class CaptchaServiceImpl extends ServiceImplX<CaptchaMapper, CaptchaEntit
     private CaptchaEntity getByUuid(String uuid) {
         LambdaQueryWrapper<CaptchaEntity> wrapper = new LambdaQueryWrapper<CaptchaEntity>()
                 .eq(CaptchaEntity::getUuid, uuid)
-                .ge(CaptchaEntity::getExpireAt, LocalDateTime.now());
+                .ge(CaptchaEntity::getExpiredAt, LocalDateTime.now());
         return baseMapper.selectOne(wrapper);
     }
 }

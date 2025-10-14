@@ -29,6 +29,7 @@ public class TagServiceImpl extends ServiceImplX<TagMapper, TagEntity> implement
     public PageResult<TagPageDTO> page(TagPageReqVO reqVO) {
         LambdaQueryWrapper<TagEntity> wrapper = new LambdaQueryWrapperX<TagEntity>()
                 .likeIfPresent(TagEntity::getName, reqVO.getName())
+                .eqIfPresent(TagEntity::getStatus, reqVO.getStatus())
                 .orderByDesc(TagEntity::getSort)
                 .orderByDesc(TagEntity::getCreatedAt);
         return TagConvert.INSTANCE.convert(baseMapper.selectPage(reqVO, wrapper));
@@ -81,7 +82,7 @@ public class TagServiceImpl extends ServiceImplX<TagMapper, TagEntity> implement
         LambdaQueryWrapper<TagEntity> wrapper = new LambdaQueryWrapper<TagEntity>()
                 .eq(TagEntity::getStatus, StatusEnum.ENABLE.getCode())
                 .orderByDesc(TagEntity::getSort)
-                .orderByDesc(TagEntity::getCreatedAt);;
+                .orderByDesc(TagEntity::getCreatedAt);
         return TagConvert.INSTANCE.covertSelect(baseMapper.selectList(wrapper));
     }
 }

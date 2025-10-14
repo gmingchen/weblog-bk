@@ -56,7 +56,7 @@ mybatis-plus:
 json-web-token: # json web token
   key: token # token 键值
   secret: efe1679416b57fd5af7ee0969d79ec94bf40e0268ba423681f47e4e84bd352dc # 秘钥
-  expire: 604800 # 过期是时间（秒）
+  expire: 604800 # 过期是时间（秒）(7天)
 
 mail: # 邮箱配置
   email: gumingchen@foxmail.com # 邮箱地址

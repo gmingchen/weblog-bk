@@ -18,9 +18,9 @@ public class TokenEntity extends BaseEntity {
     /**
      * 凭证
      */
-    private String token;
+    private String accessToken;
     /**
      * 过期时间
      */
-    private LocalDateTime expireAt;
+    private LocalDateTime accessExpiredAt;
 }

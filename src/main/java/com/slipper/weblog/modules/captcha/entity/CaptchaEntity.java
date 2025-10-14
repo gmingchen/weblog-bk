@@ -26,5 +26,5 @@ public class CaptchaEntity extends BaseEntity {
     /**
      * 过期时间
      */
-    private LocalDateTime expireAt;
+    private LocalDateTime expiredAt;
 }
