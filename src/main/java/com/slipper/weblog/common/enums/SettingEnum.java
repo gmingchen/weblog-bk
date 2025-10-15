@@ -5,6 +5,7 @@ import com.slipper.weblog.modules.setting.model.SettingValue;
 import com.slipper.weblog.modules.setting.model.dto.EmailCaptchaSetting;
 import com.slipper.weblog.modules.setting.model.dto.EmailSetting;
 import com.slipper.weblog.modules.setting.model.dto.FileLocalSetting;
+import com.slipper.weblog.modules.setting.model.dto.QqSetting;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -19,6 +20,7 @@ public enum SettingEnum implements EnumIntArray {
     FILE(1, FileLocalSetting.class),
     EMAIL(2, EmailSetting.class),
     EMAIL_CAPTCHA(3, EmailCaptchaSetting.class),
+    QQ(4, QqSetting.class),
     ;
     /**
      * key

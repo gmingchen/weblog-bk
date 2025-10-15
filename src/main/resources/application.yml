@@ -74,3 +74,4 @@ mail: # 邮箱配置
 qq:
   appId: 102121863 # QQ互联 APP ID
   appKey: dCYlkW4PaXHnAICr # QQ互联 APP Key
+  redirectUri: https://weblog.gumingchen.icu/login # QQ互联 成功授权后的回调地址

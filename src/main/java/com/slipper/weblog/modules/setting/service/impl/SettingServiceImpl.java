@@ -5,12 +5,17 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.slipper.weblog.common.enums.SettingEnum;
 import com.slipper.weblog.core.mybatisplus.expand.ServiceImplX;
 import com.slipper.weblog.core.validator.ValidatorUtils;
+import com.slipper.weblog.modules.setting.config.FileConfig;
+import com.slipper.weblog.modules.setting.config.MailConfig;
+import com.slipper.weblog.modules.setting.config.QqConfig;
+import com.slipper.weblog.modules.setting.covert.SettingConvert;
 import com.slipper.weblog.modules.setting.entity.SettingEntity;
 import com.slipper.weblog.modules.setting.mapper.SettingMapper;
 import com.slipper.weblog.modules.setting.model.SettingValue;
-import com.slipper.weblog.modules.setting.model.dto.EmailSetting;
+import com.slipper.weblog.modules.setting.model.dto.*;
 import com.slipper.weblog.modules.setting.model.vo.SettingUpdateReqVO;
 import com.slipper.weblog.modules.setting.service.SettingService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
@@ -23,6 +28,13 @@ import java.util.List;
  */
 @Service("settingService")
 public class SettingServiceImpl extends ServiceImplX<SettingMapper, SettingEntity> implements SettingService {
+
+    @Autowired
+    private FileConfig fileConfig;
+    @Autowired
+    private MailConfig mailConfig;
+    @Autowired
+    private QqConfig qqConfig;
 
     @Override
     public void update(List<SettingUpdateReqVO> list) {
@@ -67,5 +79,49 @@ public class SettingServiceImpl extends ServiceImplX<SettingMapper, SettingEntit
             return JSON.parseObject(JSON.toJSONString(settingEntity.getValue()), clazz);
         }
         return null;
+    }
+
+    @Override
+    public FileLocalSetting queryFileLocal() {
+        FileLocalSetting fileLocalSetting = this.queryByCode(SettingEnum.FILE.getCode(), FileLocalSetting.class);
+        if (fileLocalSetting == null) {
+            return SettingConvert.INSTANCE.convert(fileConfig);
+        }
+        return fileLocalSetting;
+    }
+
+    @Override
+    public EmailSetting queryEmail() {
+        EmailSetting emailSetting = this.queryByCode(SettingEnum.EMAIL.getCode(), EmailSetting.class);
+        if (emailSetting == null) {
+            return SettingConvert.INSTANCE.convert(mailConfig);
+        }
+        return emailSetting;
+    }
+
+    @Override
+    public EmailCaptchaSetting queryEmailCaptcha() {
+        return this.queryByCode(SettingEnum.EMAIL_CAPTCHA.getCode(), EmailCaptchaSetting.class);
+    }
+
+    @Override
+    public QqSetting queryQq() {
+        QqSetting qqSetting = this.queryByCode(SettingEnum.EMAIL.getCode(), QqSetting.class);
+        if (qqSetting == null) {
+            return SettingConvert.INSTANCE.convert(qqConfig);
+        }
+        return qqSetting;
+    }
+
+    @Override
+    public SettingsDTO querySettings() {
+        SettingsDTO settingsDTO = new SettingsDTO();
+        QqSetting qqSetting = this.queryByCode(SettingEnum.QQ.getCode(), QqSetting.class);
+        if (qqSetting != null) {
+            settingsDTO.setQqSetting(
+                    SettingConvert.INSTANCE.convert(qqSetting)
+            );
+        }
+        return settingsDTO;
     }
 }

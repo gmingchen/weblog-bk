@@ -10,7 +10,6 @@ import com.slipper.weblog.common.enums.SexEnum;
 import com.slipper.weblog.core.security.utils.SecurityUtils;
 import com.slipper.weblog.core.validator.ValidatorUtils;
 import com.slipper.weblog.exception.RunException;
-import com.slipper.weblog.modules.auth.config.QqConfig;
 import com.slipper.weblog.modules.auth.covert.AuthConvert;
 import com.slipper.weblog.modules.auth.model.dto.LoginUserDTO;
 import com.slipper.weblog.modules.auth.model.dto.QqAuthDTO;
@@ -24,9 +23,7 @@ import com.slipper.weblog.modules.auth.service.AuthService;
 import com.slipper.weblog.modules.captcha.entity.CaptchaEntity;
 import com.slipper.weblog.modules.captcha.service.CaptchaService;
 import com.slipper.weblog.modules.mail.service.MailService;
-import com.slipper.weblog.modules.setting.entity.SettingEntity;
-import com.slipper.weblog.modules.setting.model.dto.EmailCaptchaSetting;
-import com.slipper.weblog.modules.setting.model.dto.EmailSetting;
+import com.slipper.weblog.modules.setting.model.dto.QqSetting;
 import com.slipper.weblog.modules.setting.service.SettingService;
 import com.slipper.weblog.modules.token.entity.TokenEntity;
 import com.slipper.weblog.modules.token.service.TokenService;
@@ -56,7 +53,7 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     private MailService mailService;
     @Autowired
-    private QqConfig qqConfig;
+    private SettingService settingService;
 
     @Override
     public void sendCaptcha(CaptchaReqVO reqVO) {
@@ -185,10 +182,12 @@ public class AuthServiceImpl implements AuthService {
     private QqUserDTO getQqUser(String accessToken, String openId) {
         String url = "https://graph.qq.com/user/get_user_info";
 
+        QqSetting qqSetting = settingService.queryQq();
+
         HashMap<String, Object> params = new HashMap<>(2);
         params.put("access_token", accessToken);
         params.put("openid", openId);
-        params.put("oauth_consumer_key", qqConfig.getAppId());
+        params.put("oauth_consumer_key", qqSetting.getAppId());
 
         String result = HttpUtil.get(url, params);
         JSONObject jsonObject = JSONObject.parseObject(result);

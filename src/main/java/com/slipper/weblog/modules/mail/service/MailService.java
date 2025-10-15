@@ -20,10 +20,4 @@ public interface MailService {
      * @param captcha 验证码
      */
     void sendCaptcha(String email, String captcha);
-
-    /**
-     * 获取配置
-     * @return
-     */
-    EmailSetting getSetting();
 }

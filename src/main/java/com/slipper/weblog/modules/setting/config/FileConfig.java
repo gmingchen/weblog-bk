@@ -1,4 +1,4 @@
-package com.slipper.weblog.modules.file.config;
+package com.slipper.weblog.modules.setting.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

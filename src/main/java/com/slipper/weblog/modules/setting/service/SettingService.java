@@ -2,6 +2,7 @@ package com.slipper.weblog.modules.setting.service;
 
 import com.slipper.weblog.core.mybatisplus.expand.IServiceX;
 import com.slipper.weblog.modules.setting.entity.SettingEntity;
+import com.slipper.weblog.modules.setting.model.dto.*;
 import com.slipper.weblog.modules.setting.model.vo.SettingUpdateReqVO;
 
 import java.util.List;
@@ -32,4 +33,34 @@ public interface SettingService extends IServiceX<SettingEntity> {
      * @return
      */
     <T> T queryByCode(Integer code, Class<T> clazz);
+
+    /**
+     * 获取文件存储配置
+     * @return
+     */
+    FileLocalSetting queryFileLocal();
+
+    /**
+     * 获取邮箱配置
+     * @return
+     */
+    EmailSetting queryEmail();
+
+    /**
+     * 获取邮箱验证码配置
+     * @return
+     */
+    EmailCaptchaSetting queryEmailCaptcha();
+
+    /**
+     * 获取QQ配置
+     * @return
+     */
+    QqSetting queryQq();
+
+    /**
+     * 获取配置
+     * @return
+     */
+    SettingsDTO querySettings();
 }

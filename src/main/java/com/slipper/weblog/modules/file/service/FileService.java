@@ -15,10 +15,4 @@ public interface FileService {
      * @return
      */
     String create(MultipartFile file);
-
-    /**
-     * 获取配置
-     * @return
-     */
-    FileLocalSetting getSetting();
 }
