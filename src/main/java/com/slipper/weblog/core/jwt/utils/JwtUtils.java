@@ -56,6 +56,7 @@ public class JwtUtils {
     public String generate(Long id) {
         return generate(id, jsonWebToken.getSecret(), jsonWebToken.getExpire());
     }
+
     /**
      * 获取 载荷 信息
      * @param token jwt
@@ -80,7 +81,6 @@ public class JwtUtils {
     public Claims getClaims(String token) {
         return getClaims(token, jsonWebToken.getSecret());
     }
-
 
     /**
      * 获取过期时间
