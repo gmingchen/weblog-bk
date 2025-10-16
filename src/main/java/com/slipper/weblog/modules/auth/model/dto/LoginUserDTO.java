@@ -31,4 +31,12 @@ public class LoginUserDTO implements Serializable {
      * 邮箱
      */
     private String email;
+    /**
+     * 角色：0-作者 1-读者
+     */
+    private Integer role;
+    /**
+     * 状态：0-禁用 1-启用
+     */
+    private Integer status;
 }

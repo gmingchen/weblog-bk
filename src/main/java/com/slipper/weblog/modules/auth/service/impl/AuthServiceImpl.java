@@ -5,7 +5,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.slipper.weblog.common.enums.LoginTypeEnum;
 import com.slipper.weblog.common.enums.ResultCodeEnum;
-import com.slipper.weblog.common.enums.SettingEnum;
 import com.slipper.weblog.common.enums.SexEnum;
 import com.slipper.weblog.core.security.utils.SecurityUtils;
 import com.slipper.weblog.core.validator.ValidatorUtils;
@@ -36,7 +35,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Optional;
-import java.util.regex.Matcher;
 
 /**
  * @author gumingchen
