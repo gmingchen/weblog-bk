@@ -1,15 +1,30 @@
 package com.slipper.weblog.modules.diary.service;
 
+import com.slipper.weblog.common.pojo.PageResult;
 import com.slipper.weblog.core.mybatisplus.expand.IServiceX;
 import com.slipper.weblog.modules.diary.entity.DiaryEntity;
-import com.slipper.weblog.modules.diary.model.vo.DiaryCreateReqVO;
-import com.slipper.weblog.modules.diary.model.vo.DiaryUpdateReqVO;
-import com.slipper.weblog.modules.diary.model.vo.DiaryUpdateStatusReqVO;
+import com.slipper.weblog.modules.diary.model.dto.DiaryInfoDTO;
+import com.slipper.weblog.modules.diary.model.dto.DiaryPageDTO;
+import com.slipper.weblog.modules.diary.model.vo.*;
 
 /**
  * @author gumingchen
  */
 public interface DiaryService extends IServiceX<DiaryEntity> {
+
+    /**
+     * 分页列表
+     * @param reqVO 参数
+     * @return
+     */
+    PageResult<DiaryPageDTO> page(DiaryPageReqVO reqVO);
+
+    /**
+     * 信息
+     * @param id ID
+     * @return
+     */
+    DiaryInfoDTO info(Long id);
 
     /**
      * 新增

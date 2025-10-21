@@ -1,7 +1,9 @@
 package com.slipper.weblog.modules.diary.covert;
 
 import com.slipper.weblog.modules.diary.entity.DiaryEntity;
+import com.slipper.weblog.modules.diary.model.dto.DiaryInfoDTO;
 import com.slipper.weblog.modules.diary.model.vo.DiaryCreateReqVO;
+import com.slipper.weblog.modules.diary.model.vo.DiaryUpdatePrivateReqVO;
 import com.slipper.weblog.modules.diary.model.vo.DiaryUpdateReqVO;
 import com.slipper.weblog.modules.diary.model.vo.DiaryUpdateStatusReqVO;
 import org.mapstruct.Mapper;
@@ -17,6 +19,8 @@ public interface DiaryConvert {
     DiaryEntity convert(DiaryCreateReqVO bean);
 
     DiaryEntity convert(DiaryUpdateReqVO bean);
+
+    DiaryEntity convert(DiaryUpdatePrivateReqVO bean);
 
     DiaryEntity convert(DiaryUpdateStatusReqVO bean);
 }

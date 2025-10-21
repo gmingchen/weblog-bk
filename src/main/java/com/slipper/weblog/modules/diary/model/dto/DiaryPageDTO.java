@@ -1,34 +1,35 @@
-package com.slipper.weblog.modules.diary.entity;
+package com.slipper.weblog.modules.diary.model.dto;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.slipper.weblog.common.entity.BaseEntity;
 import lombok.Data;
-import lombok.experimental.Accessors;
 
-/**
- * 日记
- * @author gumingchen
- */
+import java.time.LocalDateTime;
+
 @Data
-@Accessors(chain = true)
-@TableName("diary")
-public class DiaryEntity extends BaseEntity {
+public class DiaryPageDTO {
+    /**
+     * ID
+     */
+    private Long id;
     /**
      * 标题
      */
     private String title;
     /**
-     * 内容
-     */
-    private String content;
-    /**
      * 心情ID
      */
     private Long moodId;
     /**
+     * 心情Emoji
+     */
+    private String moodEmoji;
+    /**
      * 天气ID
      */
     private Long weatherId;
+    /**
+     * 天气IEmoji
+     */
+    private String weatherEmoji;
     /**
      * 地址
      */
@@ -53,4 +54,12 @@ public class DiaryEntity extends BaseEntity {
      * 点赞量
      */
     private Integer likeCount;
+    /**
+     * 创建时间
+     */
+    private LocalDateTime createdAt;
+    /**
+     * 更新时间
+     */
+    private LocalDateTime updatedAt;
 }
