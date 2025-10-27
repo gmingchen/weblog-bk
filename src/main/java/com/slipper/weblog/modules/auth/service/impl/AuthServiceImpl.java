@@ -32,7 +32,10 @@ import com.slipper.weblog.modules.user.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Optional;
 
@@ -59,6 +62,7 @@ public class AuthServiceImpl implements AuthService {
         mailService.sendCaptcha(reqVO.getEmail(), captchaEntity.getCode());
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public TokenDTO login(LoginReqVO reqVO) {
         if (reqVO.getType().equals(LoginTypeEnum.EMAIL.getCode())) {
@@ -71,6 +75,7 @@ public class AuthServiceImpl implements AuthService {
         return null;
     }
 
+    @Transactional(rollbackFor = RunException.class)
     @Override
     public TokenDTO emailLogin(EmailLoginVO vo) {
         ValidatorUtils.validate(vo);
@@ -86,10 +91,13 @@ public class AuthServiceImpl implements AuthService {
             userEntity = registerByEmail(vo.getEmail());
         }
 
+        userService.updateLoginTime(userEntity.getId(), LocalDateTime.now());
+
         TokenEntity tokenEntity = tokenService.create(userEntity.getId());
         return AuthConvert.INSTANCE.convert(tokenEntity);
     }
 
+    @Transactional(rollbackFor = RunException.class)
     @Override
     public TokenDTO qqLogin(QqLoginVO vo) {
         ValidatorUtils.validate(vo);
@@ -99,6 +107,8 @@ public class AuthServiceImpl implements AuthService {
         if (userEntity == null) {
             userEntity = registerByQqOpenId(vo.getAccessToken(), qqAuthDTO.getOpenid());
         }
+
+        userService.updateLoginTime(userEntity.getId(), LocalDateTime.now());
 
         TokenEntity tokenEntity = tokenService.create(userEntity.getId());
         return AuthConvert.INSTANCE.convert(tokenEntity);

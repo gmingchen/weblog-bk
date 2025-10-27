@@ -7,6 +7,8 @@ import com.slipper.weblog.modules.tag.model.dto.TagPageDTO;
 import com.slipper.weblog.modules.tag.model.dto.TagSelectDTO;
 import com.slipper.weblog.modules.tag.model.vo.TagCreateReqVO;
 import com.slipper.weblog.modules.tag.model.vo.TagUpdateReqVO;
+import com.slipper.weblog.modules.user.entity.UserEntity;
+import com.slipper.weblog.modules.user.model.dto.UserPageDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

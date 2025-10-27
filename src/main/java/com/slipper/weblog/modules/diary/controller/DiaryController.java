@@ -43,17 +43,17 @@ public class DiaryController {
     @PreAuthorize("hasRole('ROLE_AUTHOR')")
     @PostMapping("/create")
     public Result<Long> create(@RequestBody @Validated DiaryCreateReqVO reqVO) {
-        reqVO = HttpContextUtils.getObjectBody(DiaryCreateReqVO.class);
+        DiaryCreateReqVO diaryCreateReqVO = HttpContextUtils.getObjectBody(DiaryCreateReqVO.class);
         return Result.success(
-                diaryService.create(reqVO)
+                diaryService.create(diaryCreateReqVO)
         );
     }
 
     @PreAuthorize("hasRole('ROLE_AUTHOR')")
     @PostMapping("/update")
     public Result<?> update(@RequestBody @Validated DiaryUpdateReqVO reqVO) {
-        reqVO = HttpContextUtils.getObjectBody(DiaryUpdateReqVO.class);
-        diaryService.update(reqVO);
+        DiaryUpdateReqVO diaryUpdateReqVO = HttpContextUtils.getObjectBody(DiaryUpdateReqVO.class);
+        diaryService.update(diaryUpdateReqVO);
         return Result.success();
     }
 

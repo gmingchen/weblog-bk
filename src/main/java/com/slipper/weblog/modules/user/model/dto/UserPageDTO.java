@@ -1,16 +1,18 @@
 package com.slipper.weblog.modules.user.model.dto;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
 
-import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * @author gumingchen
  */
-@Accessors(chain = true)
 @Data
-public class UserCreateDTO {
+public class UserPageDTO {
+    /**
+     * ID
+     */
+    private Long id;
     /**
      * 昵称
      */
@@ -31,4 +33,16 @@ public class UserCreateDTO {
      * QQopenid
      */
     private String qqOpenId;
+    /**
+     * 状态：0-禁用 1-启用
+     */
+    private Integer status;
+    /**
+     * 最后在线时间
+     */
+    private LocalDateTime lastAt;
+    /**
+     * 注册时间
+     */
+    private LocalDateTime createdAt;
 }

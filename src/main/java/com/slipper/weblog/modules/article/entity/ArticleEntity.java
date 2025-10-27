@@ -18,6 +18,10 @@ public class ArticleEntity extends BaseEntity {
      */
     private String title;
     /**
+     * URL友好标识符
+     */
+    private String slug;
+    /**
      * 封面图
      */
     private String cover;
