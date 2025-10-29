@@ -40,7 +40,7 @@ public class MailServiceImpl implements MailService {
 
     @Override
     public void sendCaptcha(String email, String captcha) {
-        EmailCaptchaSetting emailCaptchaSetting = settingService.queryByCode(SettingEnum.EMAIL_CAPTCHA.getCode(), EmailCaptchaSetting.class);
+        EmailCaptchaSetting emailCaptchaSetting = settingService.queryEmailCaptcha();
 
         String reg = "\\$\\{captcha\\}";
         String content = emailCaptchaSetting.getContent().replaceFirst(reg, Matcher.quoteReplacement(captcha));

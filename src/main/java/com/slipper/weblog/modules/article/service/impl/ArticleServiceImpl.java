@@ -8,10 +8,11 @@ import com.slipper.weblog.modules.article.entity.ArticleColumnEntity;
 import com.slipper.weblog.modules.article.entity.ArticleEntity;
 import com.slipper.weblog.modules.article.entity.ArticleTagEntity;
 import com.slipper.weblog.modules.article.mapper.ArticleMapper;
-import com.slipper.weblog.modules.article.model.vo.ArticleCreateReqVO;
-import com.slipper.weblog.modules.article.model.vo.ArticleUpdateFeaturedReqVO;
-import com.slipper.weblog.modules.article.model.vo.ArticleUpdateReqVO;
-import com.slipper.weblog.modules.article.model.vo.ArticleUpdateStatusReqVO;
+import com.slipper.weblog.modules.article.model.dto.ArticleInfoVO;
+import com.slipper.weblog.modules.article.model.vo.ArticleCreateDTO;
+import com.slipper.weblog.modules.article.model.vo.ArticleUpdateFeaturedDTO;
+import com.slipper.weblog.modules.article.model.vo.ArticleUpdateDTO;
+import com.slipper.weblog.modules.article.model.vo.ArticleUpdateStatusDTO;
 import com.slipper.weblog.modules.article.service.ArticleCategoryService;
 import com.slipper.weblog.modules.article.service.ArticleColumnService;
 import com.slipper.weblog.modules.article.service.ArticleService;
@@ -33,15 +34,20 @@ public class ArticleServiceImpl extends ServiceImplX<ArticleMapper, ArticleEntit
     @Autowired
     private ArticleColumnService articleColumnService;
 
+    @Override
+    public ArticleInfoVO info(Long id) {
+        return null;
+    }
+
     @Transactional(rollbackFor = RunException.class)
     @Override
-    public Long create(ArticleCreateReqVO reqVO) {
-        ArticleEntity articleEntity = ArticleConvert.INSTANCE.convert(reqVO);
+    public Long create(ArticleCreateDTO dto) {
+        ArticleEntity articleEntity = ArticleConvert.INSTANCE.convert(dto);
         baseMapper.insert(articleEntity);
 
         articleCategoryService.saveOrRemoveBatch(
                 articleEntity.getId(),
-                reqVO.getCategoryIds(),
+                dto.getCategoryIds(),
                 ArticleCategoryEntity::getArticleId,
                 ArticleCategoryEntity::getCategoryId,
                 id -> new ArticleCategoryEntity().setArticleId(articleEntity.getId()).setCategoryId((Long) id),
@@ -50,7 +56,7 @@ public class ArticleServiceImpl extends ServiceImplX<ArticleMapper, ArticleEntit
 
         articleTagService.saveOrRemoveBatch(
                 articleEntity.getId(),
-                reqVO.getCategoryIds(),
+                dto.getCategoryIds(),
                 ArticleTagEntity::getArticleId,
                 ArticleTagEntity::getTagId,
                 id -> new ArticleTagEntity().setArticleId(articleEntity.getId()).setTagId((Long) id),
@@ -59,7 +65,7 @@ public class ArticleServiceImpl extends ServiceImplX<ArticleMapper, ArticleEntit
 
         articleColumnService.saveOrRemoveBatch(
                 articleEntity.getId(),
-                reqVO.getCategoryIds(),
+                dto.getCategoryIds(),
                 ArticleColumnEntity::getArticleId,
                 ArticleColumnEntity::getColumnId,
                 id -> new ArticleColumnEntity().setArticleId(articleEntity.getId()).setColumnId((Long) id),
@@ -71,13 +77,13 @@ public class ArticleServiceImpl extends ServiceImplX<ArticleMapper, ArticleEntit
 
     @Transactional(rollbackFor = RunException.class)
     @Override
-    public void update(ArticleUpdateReqVO reqVO) {
-        ArticleEntity articleEntity = ArticleConvert.INSTANCE.convert(reqVO);
+    public void update(ArticleUpdateDTO dto) {
+        ArticleEntity articleEntity = ArticleConvert.INSTANCE.convert(dto);
         baseMapper.updateById(articleEntity);
 
         articleCategoryService.saveOrRemoveBatch(
                 articleEntity.getId(),
-                reqVO.getCategoryIds(),
+                dto.getCategoryIds(),
                 ArticleCategoryEntity::getArticleId,
                 ArticleCategoryEntity::getCategoryId,
                 id -> new ArticleCategoryEntity().setArticleId(articleEntity.getId()).setCategoryId((Long) id),
@@ -86,7 +92,7 @@ public class ArticleServiceImpl extends ServiceImplX<ArticleMapper, ArticleEntit
 
         articleTagService.saveOrRemoveBatch(
                 articleEntity.getId(),
-                reqVO.getCategoryIds(),
+                dto.getCategoryIds(),
                 ArticleTagEntity::getArticleId,
                 ArticleTagEntity::getTagId,
                 id -> new ArticleTagEntity().setArticleId(articleEntity.getId()).setTagId((Long) id),
@@ -95,7 +101,7 @@ public class ArticleServiceImpl extends ServiceImplX<ArticleMapper, ArticleEntit
 
         articleColumnService.saveOrRemoveBatch(
                 articleEntity.getId(),
-                reqVO.getCategoryIds(),
+                dto.getCategoryIds(),
                 ArticleColumnEntity::getArticleId,
                 ArticleColumnEntity::getColumnId,
                 id -> new ArticleColumnEntity().setArticleId(articleEntity.getId()).setColumnId((Long) id),
@@ -104,14 +110,14 @@ public class ArticleServiceImpl extends ServiceImplX<ArticleMapper, ArticleEntit
     }
 
     @Override
-    public void updateFeatured(ArticleUpdateFeaturedReqVO reqVO) {
-        ArticleEntity articleEntity = ArticleConvert.INSTANCE.convert(reqVO);
+    public void updateFeatured(ArticleUpdateFeaturedDTO dto) {
+        ArticleEntity articleEntity = ArticleConvert.INSTANCE.convert(dto);
         baseMapper.updateById(articleEntity);
     }
 
     @Override
-    public void updateStatus(ArticleUpdateStatusReqVO reqVO) {
-        ArticleEntity articleEntity = ArticleConvert.INSTANCE.convert(reqVO);
+    public void updateStatus(ArticleUpdateStatusDTO dto) {
+        ArticleEntity articleEntity = ArticleConvert.INSTANCE.convert(dto);
         baseMapper.updateById(articleEntity);
     }
 

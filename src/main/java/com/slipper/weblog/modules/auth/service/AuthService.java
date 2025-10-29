@@ -1,11 +1,11 @@
 package com.slipper.weblog.modules.auth.service;
 
-import com.slipper.weblog.modules.auth.model.dto.LoginUserDTO;
-import com.slipper.weblog.modules.auth.model.dto.TokenDTO;
-import com.slipper.weblog.modules.auth.model.vo.CaptchaReqVO;
-import com.slipper.weblog.modules.auth.model.vo.EmailLoginVO;
-import com.slipper.weblog.modules.auth.model.vo.LoginReqVO;
-import com.slipper.weblog.modules.auth.model.vo.QqLoginVO;
+import com.slipper.weblog.modules.auth.model.dto.LoginUserVO;
+import com.slipper.weblog.modules.auth.model.dto.TokenVO;
+import com.slipper.weblog.modules.auth.model.vo.CaptchaDTO;
+import com.slipper.weblog.modules.auth.model.vo.EmailLoginDTO;
+import com.slipper.weblog.modules.auth.model.vo.LoginDTO;
+import com.slipper.weblog.modules.auth.model.vo.QqLoginDTO;
 import com.slipper.weblog.modules.user.entity.UserEntity;
 
 /**
@@ -15,36 +15,36 @@ public interface AuthService {
 
     /**
      * 发送验证码
-     * @param reqVO
+     * @param dto
      */
-    void sendCaptcha(CaptchaReqVO reqVO);
+    void sendCaptcha(CaptchaDTO dto);
 
     /**
      * 登录
-     * @param reqVO
+     * @param dto
      * @return
      */
-    TokenDTO login(LoginReqVO reqVO);
+    TokenVO login(LoginDTO dto);
 
     /**
      * 邮箱登录
-     * @param vo
+     * @param dto
      * @return
      */
-    TokenDTO emailLogin(EmailLoginVO vo);
+    TokenVO emailLogin(EmailLoginDTO dto);
 
     /**
      * QQ登录
-     * @param vo
+     * @param dto
      * @return
      */
-    TokenDTO qqLogin(QqLoginVO vo);
+    TokenVO qqLogin(QqLoginDTO dto);
 
     /**
      * 获取登录用户信息
      * @return
      */
-    LoginUserDTO getLoginUser();
+    LoginUserVO getLoginUser();
 
     /**
      * 校验token

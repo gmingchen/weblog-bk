@@ -3,9 +3,9 @@ package com.slipper.weblog.modules.category.service;
 import com.slipper.weblog.common.pojo.PageResult;
 import com.slipper.weblog.core.mybatisplus.expand.IServiceX;
 import com.slipper.weblog.modules.category.entity.CategoryEntity;
-import com.slipper.weblog.modules.category.model.dto.CategoryPageDTO;
-import com.slipper.weblog.modules.category.model.dto.CategorySelectDTO;
-import com.slipper.weblog.modules.category.model.vo.*;
+import com.slipper.weblog.modules.category.model.vo.CategoryBaseVO;
+import com.slipper.weblog.modules.category.model.vo.CategoryPageVO;
+import com.slipper.weblog.modules.category.model.dto.*;
 
 import java.util.List;
 
@@ -15,35 +15,35 @@ import java.util.List;
 public interface CategoryService extends IServiceX<CategoryEntity> {
     /**
      * 分页
-     * @param reqVO 参数
+     * @param dto 参数
      * @return
      */
-    PageResult<CategoryPageDTO> page(CategoryPageReqVO reqVO);
+    PageResult<CategoryPageVO> page(CategoryPageDTO dto);
 
     /**
      * 新增
-     * @param reqVO 参数
+     * @param dto 参数
      * @return
      */
-    Long create(CategoryCreateReqVO reqVO);
+    Long create(CategoryCreateDTO dto);
 
     /**
      * 更新
-     * @param reqVO 参数
+     * @param dto 参数
      */
-    void update(CategoryUpdateReqVO reqVO);
+    void update(CategoryUpdateDTO dto);
 
     /**
      * 更新排序
-     * @param reqVO 参数
+     * @param dto 参数
      */
-    void updateSort(CategoryUpdateSortReqVO reqVO);
+    void updateSort(CategoryUpdateSortDTO dto);
 
     /**
      * 更新状态
-     * @param reqVO 参数
+     * @param dto 参数
      */
-    void updateStatus(CategoryUpdateStatusReqVO reqVO);
+    void updateStatus(CategoryUpdateStatusDTO dto);
 
     /**
      * 删除
@@ -55,5 +55,5 @@ public interface CategoryService extends IServiceX<CategoryEntity> {
      * 获取选择列表
      * @return
      */
-    List<CategorySelectDTO> querySelectList();
+    List<CategoryBaseVO> querySelectList();
 }

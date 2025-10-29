@@ -2,7 +2,7 @@ package com.slipper.weblog.modules.weather.service;
 
 import com.slipper.weblog.core.mybatisplus.expand.IServiceX;
 import com.slipper.weblog.modules.weather.entity.WeatherEntity;
-import com.slipper.weblog.modules.weather.model.WeatherDTO;
+import com.slipper.weblog.modules.weather.model.WeatherBaseDTO;
 
 import java.util.List;
 
@@ -11,5 +11,9 @@ import java.util.List;
  */
 public interface WeatherService extends IServiceX<WeatherEntity> {
 
-    List<WeatherDTO> queryList();
+    /**
+     * 列表
+     * @return
+     */
+    List<WeatherBaseDTO> queryList();
 }

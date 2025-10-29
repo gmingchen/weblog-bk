@@ -1,15 +1,16 @@
 package com.slipper.weblog.modules.diary.model.dto;
 
+import com.slipper.weblog.common.enums.DiaryStatusEnum;
+import com.slipper.weblog.common.enums.WhetherEnum;
+import com.slipper.weblog.common.pojo.PageParam;
+import com.slipper.weblog.core.validator.constraints.Enum;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
+/**
+ * @author gumingchen
+ */
 @Data
-public class DiaryPageDTO {
-    /**
-     * ID
-     */
-    private Long id;
+public class DiaryPageDTO extends PageParam {
     /**
      * 标题
      */
@@ -19,47 +20,18 @@ public class DiaryPageDTO {
      */
     private Long moodId;
     /**
-     * 心情Emoji
-     */
-    private String moodEmoji;
-    /**
      * 天气ID
      */
     private Long weatherId;
-    /**
-     * 天气IEmoji
-     */
-    private String weatherEmoji;
-    /**
-     * 地址
-     */
-    private String location;
+
     /**
      * 是否私密 0-否 1-是
      */
+    @Enum(WhetherEnum.class)
     private Integer isPrivate;
     /**
      * 状态：0-草稿 1-发布 2-归档
      */
+    @Enum(DiaryStatusEnum.class)
     private Integer status;
-    /**
-     * 浏览量
-     */
-    private Integer viewCount;
-    /**
-     * 评论量
-     */
-    private Integer commentCount;
-    /**
-     * 点赞量
-     */
-    private Integer likeCount;
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createdAt;
-    /**
-     * 更新时间
-     */
-    private LocalDateTime updatedAt;
 }

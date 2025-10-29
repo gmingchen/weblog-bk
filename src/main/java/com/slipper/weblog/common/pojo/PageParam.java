@@ -9,8 +9,7 @@ import java.io.Serializable;
  * @author gumingchen
  */
 @Data
-public class PageParam implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class PageParam {
 
     private static final Long CURRENT = 1L;
     private static final Long SIZE = 10L;

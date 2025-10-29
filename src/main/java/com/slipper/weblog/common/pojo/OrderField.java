@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderField implements Serializable {
+public class OrderField {
     /**
      * 升序
      */

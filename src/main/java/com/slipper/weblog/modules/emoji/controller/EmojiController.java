@@ -1,7 +1,7 @@
 package com.slipper.weblog.modules.emoji.controller;
 
 import com.slipper.weblog.common.pojo.Result;
-import com.slipper.weblog.modules.emoji.model.EmojiDTO;
+import com.slipper.weblog.modules.emoji.model.EmojiBaseDTO;
 import com.slipper.weblog.modules.emoji.service.EmojiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +18,7 @@ public class EmojiController {
     private EmojiService emojiService;
 
     @GetMapping("/pass/list")
-    public Result<List<EmojiDTO>> getList() {
+    public Result<List<EmojiBaseDTO>> getList() {
         return Result.success(
                 emojiService.queryList()
         );

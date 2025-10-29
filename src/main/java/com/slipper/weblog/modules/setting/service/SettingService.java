@@ -3,7 +3,8 @@ package com.slipper.weblog.modules.setting.service;
 import com.slipper.weblog.core.mybatisplus.expand.IServiceX;
 import com.slipper.weblog.modules.setting.entity.SettingEntity;
 import com.slipper.weblog.modules.setting.model.dto.*;
-import com.slipper.weblog.modules.setting.model.vo.SettingUpdateReqVO;
+import com.slipper.weblog.modules.setting.model.vo.SettingUpdateDTO;
+import com.slipper.weblog.modules.setting.model.vo.SettingsVO;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public interface SettingService extends IServiceX<SettingEntity> {
      * 更新配置
      * @param list
      */
-    void update(List<SettingUpdateReqVO> list);
+    void update(List<SettingUpdateDTO> list);
 
     /**
      * 通过Code编码查询配置
@@ -62,5 +63,5 @@ public interface SettingService extends IServiceX<SettingEntity> {
      * 获取配置
      * @return
      */
-    SettingsDTO querySettings();
+    SettingsVO querySettings();
 }

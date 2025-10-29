@@ -2,10 +2,10 @@ package com.slipper.weblog.modules.article.controller;
 
 import com.slipper.weblog.common.pojo.Result;
 import com.slipper.weblog.common.utils.HttpContextUtils;
-import com.slipper.weblog.modules.article.model.vo.ArticleCreateReqVO;
-import com.slipper.weblog.modules.article.model.vo.ArticleUpdateFeaturedReqVO;
-import com.slipper.weblog.modules.article.model.vo.ArticleUpdateReqVO;
-import com.slipper.weblog.modules.article.model.vo.ArticleUpdateStatusReqVO;
+import com.slipper.weblog.modules.article.model.vo.ArticleCreateDTO;
+import com.slipper.weblog.modules.article.model.vo.ArticleUpdateDTO;
+import com.slipper.weblog.modules.article.model.vo.ArticleUpdateFeaturedDTO;
+import com.slipper.weblog.modules.article.model.vo.ArticleUpdateStatusDTO;
 import com.slipper.weblog.modules.article.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -29,8 +29,8 @@ public class ArticleController {
 
     @PreAuthorize("hasRole('ROLE_AUTHOR')")
     @PostMapping("/create")
-    public Result<Long> create(@RequestBody @Validated ArticleCreateReqVO reqVO) {
-        ArticleCreateReqVO articleCreateReqVO = HttpContextUtils.getObjectBody(ArticleCreateReqVO.class);
+    public Result<Long> create(@RequestBody @Validated ArticleCreateDTO dto) {
+        ArticleCreateDTO articleCreateReqVO = HttpContextUtils.getObjectBody(ArticleCreateDTO.class);
         return Result.success(
                 articleService.create(articleCreateReqVO)
         );
@@ -38,23 +38,23 @@ public class ArticleController {
 
     @PreAuthorize("hasRole('ROLE_AUTHOR')")
     @PostMapping("/update")
-    public Result<?> update(@RequestBody @Validated ArticleUpdateReqVO reqVO) {
-        ArticleUpdateReqVO articleUpdateReqVO = HttpContextUtils.getObjectBody(ArticleUpdateReqVO.class);
+    public Result<?> update(@RequestBody @Validated ArticleUpdateDTO dto) {
+        ArticleUpdateDTO articleUpdateReqVO = HttpContextUtils.getObjectBody(ArticleUpdateDTO.class);
         articleService.update(articleUpdateReqVO);
         return Result.success();
     }
 
     @PreAuthorize("hasRole('ROLE_AUTHOR')")
     @PostMapping("/update/featured")
-    public Result<?> updateFeatured(@RequestBody @Validated ArticleUpdateFeaturedReqVO reqVO) {
-        articleService.updateFeatured(reqVO);
+    public Result<?> updateFeatured(@RequestBody @Validated ArticleUpdateFeaturedDTO dto) {
+        articleService.updateFeatured(dto);
         return Result.success();
     }
 
     @PreAuthorize("hasRole('ROLE_AUTHOR')")
     @PostMapping("/update/status")
-    public Result<?> updateStatus(@RequestBody @Validated ArticleUpdateStatusReqVO reqVO) {
-        articleService.updateStatus(reqVO);
+    public Result<?> updateStatus(@RequestBody @Validated ArticleUpdateStatusDTO dto) {
+        articleService.updateStatus(dto);
         return Result.success();
     }
 

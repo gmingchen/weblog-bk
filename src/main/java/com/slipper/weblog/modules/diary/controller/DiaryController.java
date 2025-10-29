@@ -3,8 +3,7 @@ package com.slipper.weblog.modules.diary.controller;
 import com.slipper.weblog.common.pojo.PageResult;
 import com.slipper.weblog.common.pojo.Result;
 import com.slipper.weblog.common.utils.HttpContextUtils;
-import com.slipper.weblog.modules.diary.model.dto.DiaryInfoDTO;
-import com.slipper.weblog.modules.diary.model.dto.DiaryPageDTO;
+import com.slipper.weblog.modules.diary.model.dto.*;
 import com.slipper.weblog.modules.diary.model.vo.*;
 import com.slipper.weblog.modules.diary.service.DiaryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,15 +25,15 @@ public class DiaryController {
 
     @PreAuthorize("hasRole('ROLE_AUTHOR')")
     @GetMapping("/page")
-    public Result<PageResult<DiaryPageDTO>> page(DiaryPageReqVO reqVO) {
+    public Result<PageResult<DiaryPageVO>> page(DiaryPageDTO dto) {
         return Result.success(
-                diaryService.page(reqVO)
+                diaryService.page(dto)
         );
     }
 
     @PreAuthorize("hasRole('ROLE_AUTHOR')")
     @GetMapping("/info")
-    public Result<DiaryInfoDTO> info(Long id) {
+    public Result<DiaryInfoVO> info(Long id) {
         return Result.success(
                 diaryService.info(id)
         );
@@ -42,8 +41,8 @@ public class DiaryController {
 
     @PreAuthorize("hasRole('ROLE_AUTHOR')")
     @PostMapping("/create")
-    public Result<Long> create(@RequestBody @Validated DiaryCreateReqVO reqVO) {
-        DiaryCreateReqVO diaryCreateReqVO = HttpContextUtils.getObjectBody(DiaryCreateReqVO.class);
+    public Result<Long> create(@RequestBody @Validated DiaryCreateDTO dto) {
+        DiaryCreateDTO diaryCreateReqVO = HttpContextUtils.getObjectBody(DiaryCreateDTO.class);
         return Result.success(
                 diaryService.create(diaryCreateReqVO)
         );
@@ -51,23 +50,23 @@ public class DiaryController {
 
     @PreAuthorize("hasRole('ROLE_AUTHOR')")
     @PostMapping("/update")
-    public Result<?> update(@RequestBody @Validated DiaryUpdateReqVO reqVO) {
-        DiaryUpdateReqVO diaryUpdateReqVO = HttpContextUtils.getObjectBody(DiaryUpdateReqVO.class);
+    public Result<?> update(@RequestBody @Validated DiaryUpdateDTO dto) {
+        DiaryUpdateDTO diaryUpdateReqVO = HttpContextUtils.getObjectBody(DiaryUpdateDTO.class);
         diaryService.update(diaryUpdateReqVO);
         return Result.success();
     }
 
     @PreAuthorize("hasRole('ROLE_AUTHOR')")
     @PostMapping("/update/private")
-    public Result<?> updatePrivate(@RequestBody @Validated DiaryUpdatePrivateReqVO reqVO) {
-        diaryService.updatePrivate(reqVO);
+    public Result<?> updatePrivate(@RequestBody @Validated DiaryUpdatePrivateDTO dto) {
+        diaryService.updatePrivate(dto);
         return Result.success();
     }
 
     @PreAuthorize("hasRole('ROLE_AUTHOR')")
     @PostMapping("/update/status")
-    public Result<?> updateStatus(@RequestBody @Validated DiaryUpdateStatusReqVO reqVO) {
-        diaryService.updateStatus(reqVO);
+    public Result<?> updateStatus(@RequestBody @Validated DiaryUpdateStatusDTO dto) {
+        diaryService.updateStatus(dto);
         return Result.success();
     }
 

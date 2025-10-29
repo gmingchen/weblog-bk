@@ -1,10 +1,10 @@
 package com.slipper.weblog.modules.auth.controller;
 
 import com.slipper.weblog.common.pojo.Result;
-import com.slipper.weblog.modules.auth.model.dto.LoginUserDTO;
-import com.slipper.weblog.modules.auth.model.dto.TokenDTO;
-import com.slipper.weblog.modules.auth.model.vo.CaptchaReqVO;
-import com.slipper.weblog.modules.auth.model.vo.LoginReqVO;
+import com.slipper.weblog.modules.auth.model.dto.LoginUserVO;
+import com.slipper.weblog.modules.auth.model.dto.TokenVO;
+import com.slipper.weblog.modules.auth.model.vo.CaptchaDTO;
+import com.slipper.weblog.modules.auth.model.vo.LoginDTO;
 import com.slipper.weblog.modules.auth.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -21,20 +21,20 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/pass/captcha")
-    public Result<?> captcha(@RequestBody @Validated CaptchaReqVO reqVO) {
-        authService.sendCaptcha(reqVO);
+    public Result<?> captcha(@RequestBody @Validated CaptchaDTO dto) {
+        authService.sendCaptcha(dto);
         return Result.success();
     }
 
     @PostMapping("/pass/login")
-    public Result<TokenDTO> login(@RequestBody @Validated LoginReqVO reqVO) {
+    public Result<TokenVO> login(@RequestBody @Validated LoginDTO dto) {
         return Result.success(
-                authService.login(reqVO)
+                authService.login(dto)
         );
     }
 
     @GetMapping("/user")
-    public Result<LoginUserDTO> getUserInfo() {
+    public Result<LoginUserVO> getUserInfo() {
         return Result.success(
                 authService.getLoginUser()
         );

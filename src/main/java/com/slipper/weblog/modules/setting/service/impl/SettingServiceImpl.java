@@ -13,7 +13,8 @@ import com.slipper.weblog.modules.setting.entity.SettingEntity;
 import com.slipper.weblog.modules.setting.mapper.SettingMapper;
 import com.slipper.weblog.modules.setting.model.SettingValue;
 import com.slipper.weblog.modules.setting.model.dto.*;
-import com.slipper.weblog.modules.setting.model.vo.SettingUpdateReqVO;
+import com.slipper.weblog.modules.setting.model.vo.SettingUpdateDTO;
+import com.slipper.weblog.modules.setting.model.vo.SettingsVO;
 import com.slipper.weblog.modules.setting.service.SettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,9 +38,9 @@ public class SettingServiceImpl extends ServiceImplX<SettingMapper, SettingEntit
     private QqConfig qqConfig;
 
     @Override
-    public void update(List<SettingUpdateReqVO> list) {
+    public void update(List<SettingUpdateDTO> list) {
         List<SettingEntity> settingEntityList = new ArrayList<>();
-        for (SettingUpdateReqVO reqVO : list) {
+        for (SettingUpdateDTO reqVO : list) {
             ValidatorUtils.validate(reqVO);
 
             for (String key : reqVO.getValue().keySet()) {
@@ -114,8 +115,8 @@ public class SettingServiceImpl extends ServiceImplX<SettingMapper, SettingEntit
     }
 
     @Override
-    public SettingsDTO querySettings() {
-        SettingsDTO settingsDTO = new SettingsDTO();
+    public SettingsVO querySettings() {
+        SettingsVO settingsDTO = new SettingsVO();
         QqSetting qqSetting = this.queryByCode(SettingEnum.QQ.getCode(), QqSetting.class);
         if (qqSetting != null) {
             settingsDTO.setQqSetting(

@@ -1,15 +1,15 @@
 package com.slipper.weblog.modules.tag.model.dto;
 
+import com.slipper.weblog.common.enums.StatusEnum;
+import com.slipper.weblog.common.pojo.PageParam;
+import com.slipper.weblog.core.validator.constraints.Enum;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
+/**
+ * @author gumingchen
+ */
 @Data
-public class TagPageDTO {
-    /**
-     * ID
-     */
-    private Long id;
+public class TagPageDTO extends PageParam {
     /**
      * 名称
      */
@@ -17,13 +17,6 @@ public class TagPageDTO {
     /**
      * 状态：0-禁用 1-启用
      */
+    @Enum(StatusEnum.class)
     private Integer status;
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createdAt;
-    /**
-     * 更新时间
-     */
-    private LocalDateTime updatedAt;
 }

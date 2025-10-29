@@ -7,8 +7,7 @@ import com.slipper.weblog.core.mybatisplus.expand.ServiceImplX;
 import com.slipper.weblog.modules.diary.covert.DiaryConvert;
 import com.slipper.weblog.modules.diary.entity.DiaryEntity;
 import com.slipper.weblog.modules.diary.mapper.DiaryMapper;
-import com.slipper.weblog.modules.diary.model.dto.DiaryInfoDTO;
-import com.slipper.weblog.modules.diary.model.dto.DiaryPageDTO;
+import com.slipper.weblog.modules.diary.model.dto.*;
 import com.slipper.weblog.modules.diary.model.vo.*;
 import com.slipper.weblog.modules.diary.service.DiaryService;
 import org.springframework.stereotype.Service;
@@ -20,15 +19,15 @@ import org.springframework.stereotype.Service;
 public class DiaryServiceImpl extends ServiceImplX<DiaryMapper, DiaryEntity> implements DiaryService {
 
     @Override
-    public PageResult<DiaryPageDTO> page(DiaryPageReqVO reqVO) {
-        Page<DiaryEntity> page = new Page<>(reqVO.getCurrent(), reqVO.getSize());
-        IPage<DiaryPageDTO> result = baseMapper.queryPage(
+    public PageResult<DiaryPageVO> page(DiaryPageDTO dto) {
+        Page<DiaryEntity> page = new Page<>(dto.getCurrent(), dto.getSize());
+        IPage<DiaryPageVO> result = baseMapper.queryPage(
                 page,
-                reqVO.getTitle(),
-                reqVO.getMoodId(),
-                reqVO.getWeatherId(),
-                reqVO.getIsPrivate(),
-                reqVO.getStatus()
+                dto.getTitle(),
+                dto.getMoodId(),
+                dto.getWeatherId(),
+                dto.getIsPrivate(),
+                dto.getStatus()
         );
         return new PageResult<>(
                 result.getTotal(), result.getPages(), result.getRecords()
@@ -36,32 +35,32 @@ public class DiaryServiceImpl extends ServiceImplX<DiaryMapper, DiaryEntity> imp
     }
 
     @Override
-    public DiaryInfoDTO info(Long id) {
+    public DiaryInfoVO info(Long id) {
         return baseMapper.queryInfo(id);
     }
 
     @Override
-    public Long create(DiaryCreateReqVO reqVO) {
-        DiaryEntity diaryEntity = DiaryConvert.INSTANCE.convert(reqVO);
+    public Long create(DiaryCreateDTO dto) {
+        DiaryEntity diaryEntity = DiaryConvert.INSTANCE.convert(dto);
         baseMapper.insert(diaryEntity);
         return diaryEntity.getId();
     }
 
     @Override
-    public void update(DiaryUpdateReqVO reqVO) {
-        DiaryEntity diaryEntity = DiaryConvert.INSTANCE.convert(reqVO);
+    public void update(DiaryUpdateDTO dto) {
+        DiaryEntity diaryEntity = DiaryConvert.INSTANCE.convert(dto);
         baseMapper.updateById(diaryEntity);
     }
 
     @Override
-    public void updatePrivate(DiaryUpdatePrivateReqVO reqVO) {
-        DiaryEntity diaryEntity = DiaryConvert.INSTANCE.convert(reqVO);
+    public void updatePrivate(DiaryUpdatePrivateDTO dto) {
+        DiaryEntity diaryEntity = DiaryConvert.INSTANCE.convert(dto);
         baseMapper.updateById(diaryEntity);
     }
 
     @Override
-    public void updateStatus(DiaryUpdateStatusReqVO reqVO) {
-        DiaryEntity diaryEntity = DiaryConvert.INSTANCE.convert(reqVO);
+    public void updateStatus(DiaryUpdateStatusDTO dto) {
+        DiaryEntity diaryEntity = DiaryConvert.INSTANCE.convert(dto);
         baseMapper.updateById(diaryEntity);
     }
 

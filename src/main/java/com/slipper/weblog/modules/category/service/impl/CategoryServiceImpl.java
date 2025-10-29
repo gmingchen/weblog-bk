@@ -9,9 +9,9 @@ import com.slipper.weblog.exception.RunException;
 import com.slipper.weblog.modules.category.covert.CategoryConvert;
 import com.slipper.weblog.modules.category.entity.CategoryEntity;
 import com.slipper.weblog.modules.category.mapper.CategoryMapper;
-import com.slipper.weblog.modules.category.model.dto.CategoryPageDTO;
-import com.slipper.weblog.modules.category.model.dto.CategorySelectDTO;
-import com.slipper.weblog.modules.category.model.vo.*;
+import com.slipper.weblog.modules.category.model.vo.CategoryBaseVO;
+import com.slipper.weblog.modules.category.model.vo.CategoryPageVO;
+import com.slipper.weblog.modules.category.model.dto.*;
 import com.slipper.weblog.modules.category.service.CategoryService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,33 +26,33 @@ import java.util.stream.Collectors;
 public class CategoryServiceImpl extends ServiceImplX<CategoryMapper, CategoryEntity> implements CategoryService {
 
     @Override
-    public PageResult<CategoryPageDTO> page(CategoryPageReqVO reqVO) {
+    public PageResult<CategoryPageVO> page(CategoryPageDTO dto) {
         LambdaQueryWrapper<CategoryEntity> wrapper = new LambdaQueryWrapperX<CategoryEntity>()
-                .likeIfPresent(CategoryEntity::getName, reqVO.getName())
-                .eqIfPresent(CategoryEntity::getStatus, reqVO.getStatus())
-                .eq(CategoryEntity::getParentId, reqVO.getParentId())
+                .likeIfPresent(CategoryEntity::getName, dto.getName())
+                .eqIfPresent(CategoryEntity::getStatus, dto.getStatus())
+                .eq(CategoryEntity::getParentId, dto.getParentId())
                 .orderByDesc(CategoryEntity::getSort)
                 .orderByDesc(CategoryEntity::getCreatedAt);
-        return CategoryConvert.INSTANCE.convert(baseMapper.selectPage(reqVO, wrapper));
+        return CategoryConvert.INSTANCE.convert(baseMapper.selectPage(dto, wrapper));
     }
 
     @Override
-    public Long create(CategoryCreateReqVO reqVO) {
-        CategoryEntity categoryEntity = CategoryConvert.INSTANCE.convert(reqVO);
+    public Long create(CategoryCreateDTO dto) {
+        CategoryEntity categoryEntity = CategoryConvert.INSTANCE.convert(dto);
         baseMapper.insert(categoryEntity);
         return categoryEntity.getId();
     }
 
     @Override
-    public void update(CategoryUpdateReqVO reqVO) {
-        CategoryEntity categoryEntity = CategoryConvert.INSTANCE.convert(reqVO);
+    public void update(CategoryUpdateDTO dto) {
+        CategoryEntity categoryEntity = CategoryConvert.INSTANCE.convert(dto);
         baseMapper.updateById(categoryEntity);
     }
 
     @Override
-    public void updateSort(CategoryUpdateSortReqVO reqVO) {
-        List<CategoryEntity> list = reqVO.getIds().stream().map(id -> {
-            CategoryEntity categoryEntity = new CategoryEntity().setSort(reqVO.getSort());
+    public void updateSort(CategoryUpdateSortDTO dto) {
+        List<CategoryEntity> list = dto.getIds().stream().map(id -> {
+            CategoryEntity categoryEntity = new CategoryEntity().setSort(dto.getSort());
             categoryEntity.setId(id);
             return categoryEntity;
         }).collect(Collectors.toList());
@@ -60,9 +60,9 @@ public class CategoryServiceImpl extends ServiceImplX<CategoryMapper, CategoryEn
     }
 
     @Override
-    public void updateStatus(CategoryUpdateStatusReqVO reqVO) {
-        List<CategoryEntity> list = reqVO.getIds().stream().map(id -> {
-            CategoryEntity categoryEntity = new CategoryEntity().setStatus(reqVO.getStatus());
+    public void updateStatus(CategoryUpdateStatusDTO dto) {
+        List<CategoryEntity> list = dto.getIds().stream().map(id -> {
+            CategoryEntity categoryEntity = new CategoryEntity().setStatus(dto.getStatus());
             categoryEntity.setId(id);
             return categoryEntity;
         }).collect(Collectors.toList());
@@ -78,7 +78,7 @@ public class CategoryServiceImpl extends ServiceImplX<CategoryMapper, CategoryEn
     }
 
     @Override
-    public List<CategorySelectDTO> querySelectList() {
+    public List<CategoryBaseVO> querySelectList() {
         LambdaQueryWrapper<CategoryEntity> wrapper = new LambdaQueryWrapper<CategoryEntity>()
                 .eq(CategoryEntity::getStatus, StatusEnum.ENABLE.getCode())
                 .orderByDesc(CategoryEntity::getSort)

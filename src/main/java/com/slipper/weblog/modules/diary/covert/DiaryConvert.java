@@ -1,11 +1,10 @@
 package com.slipper.weblog.modules.diary.covert;
 
 import com.slipper.weblog.modules.diary.entity.DiaryEntity;
-import com.slipper.weblog.modules.diary.model.dto.DiaryInfoDTO;
-import com.slipper.weblog.modules.diary.model.vo.DiaryCreateReqVO;
-import com.slipper.weblog.modules.diary.model.vo.DiaryUpdatePrivateReqVO;
-import com.slipper.weblog.modules.diary.model.vo.DiaryUpdateReqVO;
-import com.slipper.weblog.modules.diary.model.vo.DiaryUpdateStatusReqVO;
+import com.slipper.weblog.modules.diary.model.dto.DiaryCreateDTO;
+import com.slipper.weblog.modules.diary.model.dto.DiaryUpdatePrivateDTO;
+import com.slipper.weblog.modules.diary.model.dto.DiaryUpdateDTO;
+import com.slipper.weblog.modules.diary.model.dto.DiaryUpdateStatusDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -16,11 +15,11 @@ import org.mapstruct.factory.Mappers;
 public interface DiaryConvert {
     DiaryConvert INSTANCE = Mappers.getMapper(DiaryConvert.class);
 
-    DiaryEntity convert(DiaryCreateReqVO bean);
+    DiaryEntity convert(DiaryCreateDTO bean);
 
-    DiaryEntity convert(DiaryUpdateReqVO bean);
+    DiaryEntity convert(DiaryUpdateDTO bean);
 
-    DiaryEntity convert(DiaryUpdatePrivateReqVO bean);
+    DiaryEntity convert(DiaryUpdatePrivateDTO bean);
 
-    DiaryEntity convert(DiaryUpdateStatusReqVO bean);
+    DiaryEntity convert(DiaryUpdateStatusDTO bean);
 }

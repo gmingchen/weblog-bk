@@ -2,7 +2,7 @@ package com.slipper.weblog.modules.mood.service;
 
 import com.slipper.weblog.core.mybatisplus.expand.IServiceX;
 import com.slipper.weblog.modules.mood.entity.MoodEntity;
-import com.slipper.weblog.modules.mood.model.MoodDTO;
+import com.slipper.weblog.modules.mood.model.MoodBaseDTO;
 
 import java.util.List;
 
@@ -11,5 +11,5 @@ import java.util.List;
  */
 public interface MoodService extends IServiceX<MoodEntity> {
 
-    List<MoodDTO> queryList();
+    List<MoodBaseDTO> queryList();
 }

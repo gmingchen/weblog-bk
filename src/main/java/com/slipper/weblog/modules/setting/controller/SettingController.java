@@ -2,8 +2,8 @@ package com.slipper.weblog.modules.setting.controller;
 
 import com.slipper.weblog.common.pojo.Result;
 import com.slipper.weblog.common.utils.HttpContextUtils;
-import com.slipper.weblog.modules.setting.model.dto.SettingsDTO;
-import com.slipper.weblog.modules.setting.model.vo.SettingUpdateReqVO;
+import com.slipper.weblog.modules.setting.model.vo.SettingsVO;
+import com.slipper.weblog.modules.setting.model.vo.SettingUpdateDTO;
 import com.slipper.weblog.modules.setting.service.SettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -22,15 +22,15 @@ public class SettingController {
     private SettingService settingService;
 
     @GetMapping("/pass/infos")
-    public Result<SettingsDTO> infos() {
+    public Result<SettingsVO> infos() {
         return Result.success(
                 settingService.querySettings()
         );
     }
 
     @PostMapping("/pass/update")
-    public Result<?> update(@RequestBody @Validated List<SettingUpdateReqVO> list) {
-        list = HttpContextUtils.getListBody(SettingUpdateReqVO.class);
+    public Result<?> update(@RequestBody @Validated List<SettingUpdateDTO> list) {
+        list = HttpContextUtils.getListBody(SettingUpdateDTO.class);
         settingService.update(list);
         return Result.success();
     }

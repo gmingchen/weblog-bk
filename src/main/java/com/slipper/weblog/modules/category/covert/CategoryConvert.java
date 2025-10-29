@@ -2,10 +2,10 @@ package com.slipper.weblog.modules.category.covert;
 
 import com.slipper.weblog.common.pojo.PageResult;
 import com.slipper.weblog.modules.category.entity.CategoryEntity;
-import com.slipper.weblog.modules.category.model.dto.CategoryPageDTO;
-import com.slipper.weblog.modules.category.model.dto.CategorySelectDTO;
-import com.slipper.weblog.modules.category.model.vo.CategoryCreateReqVO;
-import com.slipper.weblog.modules.category.model.vo.CategoryUpdateReqVO;
+import com.slipper.weblog.modules.category.model.vo.CategoryPageVO;
+import com.slipper.weblog.modules.category.model.vo.CategoryBaseVO;
+import com.slipper.weblog.modules.category.model.dto.CategoryCreateDTO;
+import com.slipper.weblog.modules.category.model.dto.CategoryUpdateDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -18,14 +18,14 @@ import java.util.List;
 public interface CategoryConvert {
     CategoryConvert INSTANCE = Mappers.getMapper(CategoryConvert.class);
 
-    CategoryPageDTO covertPage(CategoryEntity bean);
-    PageResult<CategoryPageDTO> convert(PageResult<CategoryEntity> bean);
+    CategoryPageVO covertPage(CategoryEntity bean);
+    PageResult<CategoryPageVO> convert(PageResult<CategoryEntity> bean);
 
-    CategoryEntity convert(CategoryCreateReqVO bean);
+    CategoryEntity convert(CategoryCreateDTO bean);
 
-    CategoryEntity convert(CategoryUpdateReqVO bean);
+    CategoryEntity convert(CategoryUpdateDTO bean);
 
-    CategorySelectDTO covertSelect(CategoryEntity bean);
-    List<CategorySelectDTO> covertSelect(List<CategoryEntity> list);
+    CategoryBaseVO covertSelect(CategoryEntity bean);
+    List<CategoryBaseVO> covertSelect(List<CategoryEntity> list);
 
 }

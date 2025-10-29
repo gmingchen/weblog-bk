@@ -1,7 +1,7 @@
 package com.slipper.weblog.modules.file.controller;
 
 import com.slipper.weblog.common.pojo.Result;
-import com.slipper.weblog.modules.file.model.vo.FileUploadReqVO;
+import com.slipper.weblog.modules.file.model.dto.FileUploadDTO;
 import com.slipper.weblog.modules.file.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -20,9 +20,9 @@ public class FileController {
     private FileService fileService;
 
     @PostMapping("/upload")
-    public Result<String> upload(@Validated FileUploadReqVO reqVO) {
+    public Result<String> upload(@Validated FileUploadDTO dto) {
         return Result.success(
-                fileService.create(reqVO.getFile())
+                fileService.create(dto.getFile())
         );
     }
 }

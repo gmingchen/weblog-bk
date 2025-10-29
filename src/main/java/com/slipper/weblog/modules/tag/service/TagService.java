@@ -3,9 +3,9 @@ package com.slipper.weblog.modules.tag.service;
 import com.slipper.weblog.common.pojo.PageResult;
 import com.slipper.weblog.core.mybatisplus.expand.IServiceX;
 import com.slipper.weblog.modules.tag.entity.TagEntity;
-import com.slipper.weblog.modules.tag.model.dto.TagPageDTO;
-import com.slipper.weblog.modules.tag.model.dto.TagSelectDTO;
-import com.slipper.weblog.modules.tag.model.vo.*;
+import com.slipper.weblog.modules.tag.model.vo.TagBaseVO;
+import com.slipper.weblog.modules.tag.model.dto.*;
+import com.slipper.weblog.modules.tag.model.vo.TagPageVO;
 
 import java.util.List;
 
@@ -16,35 +16,35 @@ public interface TagService extends IServiceX<TagEntity> {
 
     /**
      * 分页
-     * @param reqVO 参数
+     * @param dto 参数
      * @return
      */
-    PageResult<TagPageDTO> page(TagPageReqVO reqVO);
+    PageResult<TagPageVO> page(TagPageDTO dto);
 
     /**
      * 新增
-     * @param reqVO 参数
+     * @param dto 参数
      * @return
      */
-    Long create(TagCreateReqVO reqVO);
+    Long create(TagCreateDTO dto);
 
     /**
      * 更新
-     * @param reqVO 参数
+     * @param dto 参数
      */
-    void update(TagUpdateReqVO reqVO);
+    void update(TagUpdateDTO dto);
 
     /**
      * 更新排序
-     * @param reqVO 参数
+     * @param dto 参数
      */
-    void updateSort(TagUpdateSortReqVO reqVO);
+    void updateSort(TagUpdateSortDTO dto);
 
     /**
      * 更新状态
-     * @param reqVO 参数
+     * @param dto 参数
      */
-    void updateStatus(TagUpdateStatusReqVO reqVO);
+    void updateStatus(TagUpdateStatusDTO dto);
 
     /**
      * 删除
@@ -56,5 +56,5 @@ public interface TagService extends IServiceX<TagEntity> {
      * 获取选择列表
      * @return
      */
-    List<TagSelectDTO> querySelectList();
+    List<TagBaseVO> querySelectList();
 }

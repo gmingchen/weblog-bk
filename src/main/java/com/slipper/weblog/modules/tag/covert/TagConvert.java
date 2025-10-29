@@ -1,14 +1,11 @@
 package com.slipper.weblog.modules.tag.covert;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.slipper.weblog.common.pojo.PageResult;
 import com.slipper.weblog.modules.tag.entity.TagEntity;
-import com.slipper.weblog.modules.tag.model.dto.TagPageDTO;
-import com.slipper.weblog.modules.tag.model.dto.TagSelectDTO;
-import com.slipper.weblog.modules.tag.model.vo.TagCreateReqVO;
-import com.slipper.weblog.modules.tag.model.vo.TagUpdateReqVO;
-import com.slipper.weblog.modules.user.entity.UserEntity;
-import com.slipper.weblog.modules.user.model.dto.UserPageDTO;
+import com.slipper.weblog.modules.tag.model.dto.TagCreateDTO;
+import com.slipper.weblog.modules.tag.model.dto.TagUpdateDTO;
+import com.slipper.weblog.modules.tag.model.vo.TagBaseVO;
+import com.slipper.weblog.modules.tag.model.vo.TagPageVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -21,14 +18,14 @@ import java.util.List;
 public interface TagConvert {
     TagConvert INSTANCE = Mappers.getMapper(TagConvert.class);
 
-    TagPageDTO covertPage(TagEntity bean);
-    PageResult<TagPageDTO> convert(PageResult<TagEntity> bean);
+    TagPageVO covertPage(TagEntity bean);
+    PageResult<TagPageVO> convert(PageResult<TagEntity> bean);
 
-    TagEntity convert(TagCreateReqVO bean);
+    TagEntity convert(TagCreateDTO bean);
 
-    TagEntity convert(TagUpdateReqVO bean);
+    TagEntity convert(TagUpdateDTO bean);
 
-    TagSelectDTO covertSelect(TagEntity bean);
-    List<TagSelectDTO> covertSelect(List<TagEntity> list);
+    TagBaseVO covertSelect(TagEntity bean);
+    List<TagBaseVO> covertSelect(List<TagEntity> list);
 
 }

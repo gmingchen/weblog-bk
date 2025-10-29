@@ -3,7 +3,7 @@
 
 <mapper namespace="com.slipper.weblog.modules.diary.mapper.DiaryMapper">
 
-    <select id="queryPage" resultType="com.slipper.weblog.modules.diary.model.dto.DiaryPageDTO">
+    <select id="queryPage" resultType="com.slipper.weblog.modules.diary.model.vo.DiaryPageVO">
         SELECT d.id, d.title, d.is_private, d.status, d.view_count, d.comment_count, d.like_count,
                d.created_at, d.updated_at,
                d.mood_id, m.emoji AS moodEmoji, d.weather_id, w.emoji AS weatherEmoji
@@ -29,7 +29,7 @@
         ORDER BY d.created_at DESC
     </select>
 
-    <select id="queryInfo" resultType="com.slipper.weblog.modules.diary.model.dto.DiaryInfoDTO">
+    <select id="queryInfo" resultType="com.slipper.weblog.modules.diary.model.vo.DiaryInfoVO">
         SELECT d.id, d.title, d.content, d.location, d.is_private, d.status,
                d.view_count, d.comment_count, d.like_count, d.created_at, d.updated_at,
                d.mood_id, m.name AS moodName, m.emoji AS moodEmoji,

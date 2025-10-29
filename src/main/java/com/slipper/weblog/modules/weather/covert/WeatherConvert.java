@@ -1,7 +1,7 @@
 package com.slipper.weblog.modules.weather.covert;
 
 import com.slipper.weblog.modules.weather.entity.WeatherEntity;
-import com.slipper.weblog.modules.weather.model.WeatherDTO;
+import com.slipper.weblog.modules.weather.model.WeatherBaseDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -14,7 +14,7 @@ import java.util.List;
 public interface WeatherConvert {
     WeatherConvert INSTANCE = Mappers.getMapper(WeatherConvert.class);
 
-    WeatherDTO covert(WeatherEntity bean);
+    WeatherBaseDTO covert(WeatherEntity bean);
 
-    List<WeatherDTO> covert(List<WeatherEntity> list);
+    List<WeatherBaseDTO> covert(List<WeatherEntity> list);
 }

@@ -14,8 +14,7 @@ import java.util.List;
 @Accessors(chain = true)
 @Data
 @NoArgsConstructor
-public class PageResult<T> implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class PageResult<T> {
     /**
      * 总记录数
      */

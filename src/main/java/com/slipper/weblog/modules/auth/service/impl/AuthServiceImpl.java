@@ -10,14 +10,14 @@ import com.slipper.weblog.core.security.utils.SecurityUtils;
 import com.slipper.weblog.core.validator.ValidatorUtils;
 import com.slipper.weblog.exception.RunException;
 import com.slipper.weblog.modules.auth.covert.AuthConvert;
-import com.slipper.weblog.modules.auth.model.dto.LoginUserDTO;
-import com.slipper.weblog.modules.auth.model.dto.QqAuthDTO;
-import com.slipper.weblog.modules.auth.model.dto.QqUserDTO;
-import com.slipper.weblog.modules.auth.model.dto.TokenDTO;
-import com.slipper.weblog.modules.auth.model.vo.CaptchaReqVO;
-import com.slipper.weblog.modules.auth.model.vo.EmailLoginVO;
-import com.slipper.weblog.modules.auth.model.vo.LoginReqVO;
-import com.slipper.weblog.modules.auth.model.vo.QqLoginVO;
+import com.slipper.weblog.modules.auth.model.dto.LoginUserVO;
+import com.slipper.weblog.modules.auth.model.dto.QqAuthVO;
+import com.slipper.weblog.modules.auth.model.dto.QqUserVO;
+import com.slipper.weblog.modules.auth.model.dto.TokenVO;
+import com.slipper.weblog.modules.auth.model.vo.CaptchaDTO;
+import com.slipper.weblog.modules.auth.model.vo.EmailLoginDTO;
+import com.slipper.weblog.modules.auth.model.vo.LoginDTO;
+import com.slipper.weblog.modules.auth.model.vo.QqLoginDTO;
 import com.slipper.weblog.modules.auth.service.AuthService;
 import com.slipper.weblog.modules.captcha.entity.CaptchaEntity;
 import com.slipper.weblog.modules.captcha.service.CaptchaService;
@@ -57,19 +57,19 @@ public class AuthServiceImpl implements AuthService {
     private SettingService settingService;
 
     @Override
-    public void sendCaptcha(CaptchaReqVO reqVO) {
-        CaptchaEntity captchaEntity = captchaService.create(reqVO.getUuid());
-        mailService.sendCaptcha(reqVO.getEmail(), captchaEntity.getCode());
+    public void sendCaptcha(CaptchaDTO dto) {
+        CaptchaEntity captchaEntity = captchaService.create(dto.getUuid());
+        mailService.sendCaptcha(dto.getEmail(), captchaEntity.getCode());
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public TokenDTO login(LoginReqVO reqVO) {
-        if (reqVO.getType().equals(LoginTypeEnum.EMAIL.getCode())) {
-            EmailLoginVO emailLoginVO = AuthConvert.INSTANCE.convertEmail(reqVO);
+    public TokenVO login(LoginDTO dto) {
+        if (dto.getType().equals(LoginTypeEnum.EMAIL.getCode())) {
+            EmailLoginDTO emailLoginVO = AuthConvert.INSTANCE.convertEmail(dto);
             return this.emailLogin(emailLoginVO);
-        } else if (reqVO.getType().equals(LoginTypeEnum.QQ.getCode())) {
-            QqLoginVO qqLoginVO = AuthConvert.INSTANCE.convertQq(reqVO);
+        } else if (dto.getType().equals(LoginTypeEnum.QQ.getCode())) {
+            QqLoginDTO qqLoginVO = AuthConvert.INSTANCE.convertQq(dto);
             return this.qqLogin(qqLoginVO);
         }
         return null;
@@ -77,18 +77,18 @@ public class AuthServiceImpl implements AuthService {
 
     @Transactional(rollbackFor = RunException.class)
     @Override
-    public TokenDTO emailLogin(EmailLoginVO vo) {
-        ValidatorUtils.validate(vo);
+    public TokenVO emailLogin(EmailLoginDTO dto) {
+        ValidatorUtils.validate(dto);
 
-        Boolean validate = captchaService.validate(vo.getUuid(), vo.getCaptcha());
+        Boolean validate = captchaService.validate(dto.getUuid(), dto.getCaptcha());
         if (Boolean.FALSE.equals(validate)) {
             throw new RunException(ResultCodeEnum.CAPTCHA_ERROR);
         }
-        captchaService.deleteByUuid(vo.getUuid());
+        captchaService.deleteByUuid(dto.getUuid());
 
-        UserEntity userEntity = userService.queryUserByEmail(vo.getEmail());
+        UserEntity userEntity = userService.queryUserByEmail(dto.getEmail());
         if (userEntity == null) {
-            userEntity = registerByEmail(vo.getEmail());
+            userEntity = registerByEmail(dto.getEmail());
         }
 
         userService.updateLoginTime(userEntity.getId(), LocalDateTime.now());
@@ -99,13 +99,13 @@ public class AuthServiceImpl implements AuthService {
 
     @Transactional(rollbackFor = RunException.class)
     @Override
-    public TokenDTO qqLogin(QqLoginVO vo) {
-        ValidatorUtils.validate(vo);
+    public TokenVO qqLogin(QqLoginDTO dto) {
+        ValidatorUtils.validate(dto);
 
-        QqAuthDTO qqAuthDTO = this.qqAuth(vo.getAccessToken());
+        QqAuthVO qqAuthDTO = this.qqAuth(dto.getAccessToken());
         UserEntity userEntity = userService.queryUserByQqOpenId(qqAuthDTO.getOpenid());
         if (userEntity == null) {
-            userEntity = registerByQqOpenId(vo.getAccessToken(), qqAuthDTO.getOpenid());
+            userEntity = registerByQqOpenId(dto.getAccessToken(), qqAuthDTO.getOpenid());
         }
 
         userService.updateLoginTime(userEntity.getId(), LocalDateTime.now());
@@ -115,7 +115,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public LoginUserDTO getLoginUser() {
+    public LoginUserVO getLoginUser() {
         return AuthConvert.INSTANCE.convert(SecurityUtils.getLoginUser());
     }
 
@@ -150,7 +150,7 @@ public class AuthServiceImpl implements AuthService {
      * @return
      */
     private UserEntity registerByQqOpenId(String accessToken, String qqOpenId) {
-        QqUserDTO qqUser = this.getQqUser(accessToken, qqOpenId);
+        QqUserVO qqUser = this.getQqUser(accessToken, qqOpenId);
 
         String avatar = StringUtils.isNotBlank(qqUser.getFigureurl_qq_2())
                 ? qqUser.getFigureurl_qq_2()
@@ -175,7 +175,7 @@ public class AuthServiceImpl implements AuthService {
      * @param accessToken 凭证
      * @return
      */
-    private QqAuthDTO qqAuth(String accessToken) {
+    private QqAuthVO qqAuth(String accessToken) {
         String url = "https://graph.qq.com/oauth2.0/me";
 
         HashMap<String, Object> params = new HashMap<>(2);
@@ -184,10 +184,10 @@ public class AuthServiceImpl implements AuthService {
 
         String result = HttpUtil.get(url, params);
         JSONObject jsonObject = JSON.parseObject(result);
-        return jsonObject.toJavaObject(QqAuthDTO.class);
+        return jsonObject.toJavaObject(QqAuthVO.class);
     }
 
-    private QqUserDTO getQqUser(String accessToken, String openId) {
+    private QqUserVO getQqUser(String accessToken, String openId) {
         String url = "https://graph.qq.com/user/get_user_info";
 
         QqSetting qqSetting = settingService.queryQq();
@@ -199,7 +199,7 @@ public class AuthServiceImpl implements AuthService {
 
         String result = HttpUtil.get(url, params);
         JSONObject jsonObject = JSONObject.parseObject(result);
-        return jsonObject.toJavaObject(QqUserDTO.class);
+        return jsonObject.toJavaObject(QqUserVO.class);
     }
 
 }

@@ -3,4 +3,17 @@
 
 <mapper namespace="com.slipper.weblog.modules.article.mapper.ArticleMapper">
 
+    <resultMap id="ArticleInfoMap" type="com.slipper.weblog.modules.article.model.dto.ArticleInfoVO">
+
+    </resultMap>
+
+    <select id="queryInfo" resultMap="ArticleInfoMap">
+        SELECT
+        FROM article as a
+                 LEFT JOIN article__category as aca ON aca.category_id = a.category_id
+                 LEFT JOIN article__tag as ata ON aca.tag_id = a.tag_id
+                 LEFT JOIN article__column as aco ON aca.column_id = a.column_id
+        WHERE d.id = #{ id }
+          AND d.deleted = 0
+    </select>
 </mapper>

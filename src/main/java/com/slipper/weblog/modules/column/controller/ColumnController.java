@@ -2,10 +2,10 @@ package com.slipper.weblog.modules.column.controller;
 
 import com.slipper.weblog.common.pojo.PageResult;
 import com.slipper.weblog.common.pojo.Result;
+import com.slipper.weblog.modules.column.model.vo.ColumnPageVO;
 import com.slipper.weblog.modules.column.service.ColumnService;
-import com.slipper.weblog.modules.column.model.dto.ColumnPageDTO;
-import com.slipper.weblog.modules.column.model.dto.ColumnSelectDTO;
-import com.slipper.weblog.modules.column.model.vo.*;
+import com.slipper.weblog.modules.column.model.vo.ColumnBaseVO;
+import com.slipper.weblog.modules.column.model.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -23,38 +23,38 @@ public class ColumnController {
 
     @PreAuthorize("hasRole('ROLE_AUTHOR')")
     @GetMapping("/page")
-    public Result<PageResult<ColumnPageDTO>> page(@Validated ColumnPageReqVO reqVO) {
+    public Result<PageResult<ColumnPageVO>> page(@Validated ColumnPageDTO dto) {
         return Result.success(
-                columnService.page(reqVO)
+                columnService.page(dto)
         );
     }
 
     @PreAuthorize("hasRole('ROLE_AUTHOR')")
     @PostMapping("/create")
-    public Result<Long> create(@RequestBody @Validated ColumnCreateReqVO reqVO) {
+    public Result<Long> create(@RequestBody @Validated ColumnCreateDTO dto) {
         return Result.success(
-                columnService.create(reqVO)
+                columnService.create(dto)
         );
     }
 
     @PreAuthorize("hasRole('ROLE_AUTHOR')")
     @PostMapping("/update")
-    public Result<?> update(@RequestBody @Validated ColumnUpdateReqVO reqVO) {
-        columnService.update(reqVO);
+    public Result<?> update(@RequestBody @Validated ColumnUpdateReqVO dto) {
+        columnService.update(dto);
         return Result.success();
     }
 
     @PreAuthorize("hasRole('ROLE_AUTHOR')")
     @PostMapping("/update/sort")
-    public Result<?> updateSort(@RequestBody @Validated ColumnUpdateSortReqVO reqVO) {
-        columnService.updateSort(reqVO);
+    public Result<?> updateSort(@RequestBody @Validated ColumnUpdateSortDTO dto) {
+        columnService.updateSort(dto);
         return Result.success();
     }
 
     @PreAuthorize("hasRole('ROLE_AUTHOR')")
     @PostMapping("/update/status")
-    public Result<?> updateStatus(@RequestBody @Validated ColumnUpdateStatusReqVO reqVO) {
-        columnService.updateStatus(reqVO);
+    public Result<?> updateStatus(@RequestBody @Validated ColumnUpdateStatusDTO dto) {
+        columnService.updateStatus(dto);
         return Result.success();
     }
 
@@ -66,7 +66,7 @@ public class ColumnController {
     }
 
     @GetMapping("/pass/list")
-    public Result<List<ColumnSelectDTO>> list() {
+    public Result<List<ColumnBaseVO>> list() {
         return Result.success(
                 columnService.querySelectList()
         );

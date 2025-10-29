@@ -10,8 +10,7 @@ import java.io.Serializable;
  * @author gumingchen
  */
 @Data
-public class Result<T> implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class Result<T> {
     /**
      * 错误码
      */

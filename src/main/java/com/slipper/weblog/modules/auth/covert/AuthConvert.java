@@ -1,10 +1,10 @@
 package com.slipper.weblog.modules.auth.covert;
 
-import com.slipper.weblog.modules.auth.model.dto.LoginUserDTO;
-import com.slipper.weblog.modules.auth.model.dto.TokenDTO;
-import com.slipper.weblog.modules.auth.model.vo.EmailLoginVO;
-import com.slipper.weblog.modules.auth.model.vo.LoginReqVO;
-import com.slipper.weblog.modules.auth.model.vo.QqLoginVO;
+import com.slipper.weblog.modules.auth.model.dto.LoginUserVO;
+import com.slipper.weblog.modules.auth.model.dto.TokenVO;
+import com.slipper.weblog.modules.auth.model.vo.EmailLoginDTO;
+import com.slipper.weblog.modules.auth.model.vo.LoginDTO;
+import com.slipper.weblog.modules.auth.model.vo.QqLoginDTO;
 import com.slipper.weblog.modules.token.entity.TokenEntity;
 import com.slipper.weblog.modules.user.entity.UserEntity;
 import org.mapstruct.Mapper;
@@ -18,13 +18,13 @@ import org.mapstruct.factory.Mappers;
 public interface AuthConvert {
     AuthConvert INSTANCE = Mappers.getMapper(AuthConvert.class);
 
-    EmailLoginVO convertEmail(LoginReqVO bean);
+    EmailLoginDTO convertEmail(LoginDTO bean);
 
-    QqLoginVO convertQq(LoginReqVO bean);
+    QqLoginDTO convertQq(LoginDTO bean);
 
-    LoginUserDTO convert(UserEntity bean);
+    LoginUserVO convert(UserEntity bean);
 
     @Mapping(target = "userId", source = "creator")
-    TokenDTO convert(TokenEntity bean);
+    TokenVO convert(TokenEntity bean);
 
 }

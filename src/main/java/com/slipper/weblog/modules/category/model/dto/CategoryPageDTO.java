@@ -1,44 +1,29 @@
 package com.slipper.weblog.modules.category.model.dto;
 
+import com.slipper.weblog.common.enums.StatusEnum;
+import com.slipper.weblog.common.pojo.PageParam;
+import com.slipper.weblog.core.validator.constraints.Enum;
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author gumingchen
  */
 @Data
-public class CategoryPageDTO {
+public class CategoryPageDTO extends PageParam {
     /**
-     * ID
+     * 父级ID 0-表示顶级
      */
-    private Long id;
+    @NotNull(message = "父级ID不能为空")
+    private Long parentId;
     /**
      * 名称
      */
     private String name;
     /**
-     * 描述
-     */
-    private String description;
-    /**
-     * 父级ID 0-表示顶级
-     */
-    private Long parentId;
-    /**
-     * 排序：越大位置越靠前
-     */
-    private Integer sort;
-    /**
      * 状态：0-禁用 1-启用
      */
+    @Enum(StatusEnum.class)
     private Integer status;
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createdAt;
-    /**
-     * 更新时间
-     */
-    private LocalDateTime updatedAt;
 }

@@ -2,10 +2,11 @@ package com.slipper.weblog.modules.article.service;
 
 import com.slipper.weblog.core.mybatisplus.expand.IServiceX;
 import com.slipper.weblog.modules.article.entity.ArticleEntity;
-import com.slipper.weblog.modules.article.model.vo.ArticleCreateReqVO;
-import com.slipper.weblog.modules.article.model.vo.ArticleUpdateFeaturedReqVO;
-import com.slipper.weblog.modules.article.model.vo.ArticleUpdateReqVO;
-import com.slipper.weblog.modules.article.model.vo.ArticleUpdateStatusReqVO;
+import com.slipper.weblog.modules.article.model.dto.ArticleInfoVO;
+import com.slipper.weblog.modules.article.model.vo.ArticleCreateDTO;
+import com.slipper.weblog.modules.article.model.vo.ArticleUpdateDTO;
+import com.slipper.weblog.modules.article.model.vo.ArticleUpdateFeaturedDTO;
+import com.slipper.weblog.modules.article.model.vo.ArticleUpdateStatusDTO;
 
 /**
  * @author gumingchen
@@ -13,30 +14,37 @@ import com.slipper.weblog.modules.article.model.vo.ArticleUpdateStatusReqVO;
 public interface ArticleService extends IServiceX<ArticleEntity> {
 
     /**
-     * 新增
-     * @param reqVO 参数
+     * 信息
+     * @param id ID
      * @return
      */
-    Long create(ArticleCreateReqVO reqVO);
+    ArticleInfoVO info(Long id);
+
+    /**
+     * 新增
+     * @param dto 参数
+     * @return
+     */
+    Long create(ArticleCreateDTO dto);
 
     /**
      * 编辑
-     * @param reqVO 参数
+     * @param dto 参数
      * @return
      */
-    void update(ArticleUpdateReqVO reqVO);
+    void update(ArticleUpdateDTO dto);
 
     /**
      * 更新是否精选
-     * @param reqVO 参数
+     * @param dto 参数
      */
-    void updateFeatured(ArticleUpdateFeaturedReqVO reqVO);
+    void updateFeatured(ArticleUpdateFeaturedDTO dto);
 
     /**
      * 更新状态
-     * @param reqVO 参数
+     * @param dto 参数
      */
-    void updateStatus(ArticleUpdateStatusReqVO reqVO);
+    void updateStatus(ArticleUpdateStatusDTO dto);
 
     /**
      * 删除
