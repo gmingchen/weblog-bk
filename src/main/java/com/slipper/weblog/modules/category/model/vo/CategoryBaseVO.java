@@ -15,8 +15,4 @@ public class CategoryBaseVO {
      * 名称
      */
     private String name;
-    /**
-     * 父级ID 0-表示顶级
-     */
-    private Long parentId;
 }

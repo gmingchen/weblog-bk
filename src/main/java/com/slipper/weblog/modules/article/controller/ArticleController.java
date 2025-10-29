@@ -2,18 +2,17 @@ package com.slipper.weblog.modules.article.controller;
 
 import com.slipper.weblog.common.pojo.Result;
 import com.slipper.weblog.common.utils.HttpContextUtils;
+import com.slipper.weblog.modules.article.model.dto.ArticleInfoVO;
 import com.slipper.weblog.modules.article.model.vo.ArticleCreateDTO;
 import com.slipper.weblog.modules.article.model.vo.ArticleUpdateDTO;
 import com.slipper.weblog.modules.article.model.vo.ArticleUpdateFeaturedDTO;
 import com.slipper.weblog.modules.article.model.vo.ArticleUpdateStatusDTO;
 import com.slipper.weblog.modules.article.service.ArticleService;
+import com.slipper.weblog.modules.diary.model.vo.DiaryInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
 
@@ -26,6 +25,14 @@ public class ArticleController {
 
     @Autowired
     private ArticleService articleService;
+
+    @PreAuthorize("hasRole('ROLE_AUTHOR')")
+    @GetMapping("/info")
+    public Result<ArticleInfoVO> info(Long id) {
+        return Result.success(
+                articleService.info(id)
+        );
+    }
 
     @PreAuthorize("hasRole('ROLE_AUTHOR')")
     @PostMapping("/create")

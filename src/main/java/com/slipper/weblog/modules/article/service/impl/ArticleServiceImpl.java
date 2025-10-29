@@ -36,7 +36,7 @@ public class ArticleServiceImpl extends ServiceImplX<ArticleMapper, ArticleEntit
 
     @Override
     public ArticleInfoVO info(Long id) {
-        return null;
+        return baseMapper.queryInfo(id);
     }
 
     @Transactional(rollbackFor = RunException.class)
