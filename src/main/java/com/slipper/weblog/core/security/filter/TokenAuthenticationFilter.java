@@ -29,15 +29,17 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token = SecurityUtils.getToken(request);
-        Boolean flag = authService.validateToken(token);
-        if (StringUtils.isNotBlank(token) && Boolean.TRUE.equals(flag)) {
-            Optional.ofNullable(authService.queryUserByToken(token))
-                    .ifPresent(loginUser -> {
-                        String role = loginUser.getRole() == 0 ? "ROLE_AUTHOR" : "ROLE_READER";
-                        Set<SimpleGrantedAuthority> roles  = new HashSet<>();
-                        roles.add(new SimpleGrantedAuthority(role));
-                        SecurityUtils.setLoginUser(loginUser, roles, request);
-                    });
+        if (StringUtils.isNotBlank(token)) {
+            Boolean flag = authService.validateToken(token);
+            if (Boolean.TRUE.equals(flag)) {
+                Optional.ofNullable(authService.queryUserByToken(token))
+                        .ifPresent(loginUser -> {
+                            String role = loginUser.getRole() == 0 ? "ROLE_AUTHOR" : "ROLE_READER";
+                            Set<SimpleGrantedAuthority> roles  = new HashSet<>();
+                            roles.add(new SimpleGrantedAuthority(role));
+                            SecurityUtils.setLoginUser(loginUser, roles, request);
+                        });
+            }
         }
         filterChain.doFilter(request, response);
     }
