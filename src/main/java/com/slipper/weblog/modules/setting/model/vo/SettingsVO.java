@@ -13,4 +13,9 @@ public class SettingsVO {
      * QQ配置
      */
     private QqSettingVO qqSetting;
+
+    /**
+     * 网站设置
+     */
+    private WebsiteSettingVO websiteSetting;
 }

@@ -2,10 +2,7 @@ package com.slipper.weblog.common.enums;
 
 import cn.hutool.core.util.ArrayUtil;
 import com.slipper.weblog.modules.setting.model.SettingValue;
-import com.slipper.weblog.modules.setting.model.dto.EmailCaptchaSetting;
-import com.slipper.weblog.modules.setting.model.dto.EmailSetting;
-import com.slipper.weblog.modules.setting.model.dto.FileLocalSetting;
-import com.slipper.weblog.modules.setting.model.dto.QqSetting;
+import com.slipper.weblog.modules.setting.model.dto.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -21,6 +18,7 @@ public enum SettingEnum implements EnumIntArray {
     EMAIL(2, EmailSetting.class),
     EMAIL_CAPTCHA(3, EmailCaptchaSetting.class),
     QQ(4, QqSetting.class),
+    WEBSITE(5, WebsiteSetting.class),
     ;
     /**
      * key

@@ -60,6 +60,12 @@ public interface SettingService extends IServiceX<SettingEntity> {
     QqSetting queryQq();
 
     /**
+     * 获取站点配置
+     * @return
+     */
+    WebsiteSetting queryWebsite();
+
+    /**
      * 获取配置
      * @return
      */

@@ -5,6 +5,7 @@ import com.slipper.weblog.modules.setting.config.MailConfig;
 import com.slipper.weblog.modules.setting.config.QqConfig;
 import com.slipper.weblog.modules.setting.model.dto.*;
 import com.slipper.weblog.modules.setting.model.vo.QqSettingVO;
+import com.slipper.weblog.modules.setting.model.vo.WebsiteSettingVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -20,4 +21,5 @@ public interface SettingConvert {
     QqSetting convert(QqConfig bean);
 
     QqSettingVO convert(QqSetting bean);
+    WebsiteSettingVO convert(WebsiteSetting bean);
 }

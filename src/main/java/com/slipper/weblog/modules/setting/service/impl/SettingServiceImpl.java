@@ -23,6 +23,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author gumingchen
@@ -107,7 +108,7 @@ public class SettingServiceImpl extends ServiceImplX<SettingMapper, SettingEntit
 
     @Override
     public QqSetting queryQq() {
-        QqSetting qqSetting = this.queryByCode(SettingEnum.EMAIL.getCode(), QqSetting.class);
+        QqSetting qqSetting = this.queryByCode(SettingEnum.QQ.getCode(), QqSetting.class);
         if (qqSetting == null) {
             return SettingConvert.INSTANCE.convert(qqConfig);
         }
@@ -115,14 +116,23 @@ public class SettingServiceImpl extends ServiceImplX<SettingMapper, SettingEntit
     }
 
     @Override
+    public WebsiteSetting queryWebsite() {
+        return this.queryByCode(SettingEnum.WEBSITE.getCode(), WebsiteSetting.class);
+    }
+
+    @Override
     public SettingsVO querySettings() {
         SettingsVO settingsDTO = new SettingsVO();
-        QqSetting qqSetting = this.queryByCode(SettingEnum.QQ.getCode(), QqSetting.class);
-        if (qqSetting != null) {
+        Optional.ofNullable(this.queryQq()).ifPresent(w -> {
             settingsDTO.setQqSetting(
-                    SettingConvert.INSTANCE.convert(qqSetting)
+                    SettingConvert.INSTANCE.convert(w)
             );
-        }
+        });
+        Optional.ofNullable(this.queryWebsite()).ifPresent(w -> {
+            settingsDTO.setWebsiteSetting(
+                    SettingConvert.INSTANCE.convert(w)
+            );
+        });
         return settingsDTO;
     }
 }
