@@ -20,8 +20,8 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
-    @PostMapping("/pass/captcha")
-    public Result<?> captcha(@RequestBody @Validated CaptchaDTO dto) {
+    @GetMapping("/pass/captcha")
+    public Result<?> captcha(@Validated CaptchaDTO dto) {
         authService.sendCaptcha(dto);
         return Result.success();
     }

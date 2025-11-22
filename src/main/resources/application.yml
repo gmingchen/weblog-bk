@@ -60,7 +60,7 @@ json-web-token: # json web token
 
 file: # 文件上传配置
   domain: https://weblog.gumingchen.icu # 域名
-  url: /file # 虚拟路径路径
+  url: /resource # 虚拟路径路径
   path: E:/github/weblog-bk # 物理路径
 
 mail: # 邮箱配置
